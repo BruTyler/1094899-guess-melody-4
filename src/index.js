@@ -2,16 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/app.jsx';
 
-const settings = {
-  gameTime: 5,
-  errorCount: 3
+const Settings = {
+  GAMETIME: 5,
+  ERRORCOUNT: 3
 };
 
 const init = () => {
   ReactDOM.render(
       <App
-        gameTime={settings.gameTime}
-        errorCount={settings.errorCount}
+        gameTime={Settings.GAMETIME}
+        errorCount={Settings.ERRORCOUNT}
       />,
       document.querySelector(`#root`)
   );
