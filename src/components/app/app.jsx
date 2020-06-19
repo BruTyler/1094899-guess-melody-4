@@ -25,17 +25,18 @@ class App extends PureComponent {
         </Route>
         <Route exact path="/dev-artist">
           <QuestionArtistScreen
-            question={questions[0]}/>
+            onAnswer={() => {}}
+            question={questions[1]}/>
         </Route>
         <Route exact path="/dev-genre">
           <QuestionGenreScreen
+            onAnswer={() => {}}
             question={questions[0]} />
         </Route>
       </Switch>
     </BrowserRouter>;
   }
 }
-
 
 App.propTypes = {
   gameTime: PropTypes.number.isRequired,
