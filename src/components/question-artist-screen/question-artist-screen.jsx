@@ -42,7 +42,7 @@ const QuestionArtistScreen = (props) => {
             <input className="artist__input visually-hidden" type="radio" name="answer" value={`answer-${index}`} id={`answer-${index}`}
               onChange={(event) => {
                 event.preventDefault();
-                onAnswer(question, event);
+                onAnswer(question, answer);
               }}
             />
             <label className="artist__name" htmlFor={`answer-${index}`}>
@@ -59,7 +59,7 @@ const QuestionArtistScreen = (props) => {
 QuestionArtistScreen.propTypes = {
   onAnswer: PropTypes.func.isRequired,
   question: PropTypes.shape({
-    type: PropTypes.oneOf([GameType.ARTIST, GameType.GENRE]).isRequired,
+    type: PropTypes.oneOf([GameType.ARTIST]).isRequired,
     song: PropTypes.shape({
       artist: PropTypes.string.isRequired,
       src: PropTypes.string.isRequired,
