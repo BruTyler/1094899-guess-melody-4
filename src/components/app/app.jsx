@@ -9,11 +9,13 @@ import {GameType} from "../../const.js";
 class App extends PureComponent {
   constructor(props) {
     super(props);
-    this.handleWelcomeButtonClick = this.handleWelcomeButtonClick.bind(this);
-    this.handleAnswerSubmit = this.handleAnswerSubmit.bind(this);
+    
     this.state = {
       step: -1
     };
+    
+    this.handleWelcomeButtonClick = this.handleWelcomeButtonClick.bind(this);
+    this.handleAnswerSubmit = this.handleAnswerSubmit.bind(this);
   }
 
   handleWelcomeButtonClick() {
