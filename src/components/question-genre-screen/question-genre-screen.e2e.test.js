@@ -46,7 +46,7 @@ describe(`QuestionGenreScreen e2e suite`, () => {
 
   it(`QuestionGenreScreen answer callback contains user answers`, () => {
     const expectedUserAnswers = [false, true, false, false];
-    const onAnswerMock = jest.fn((...args) => [...args]);
+    const onAnswerMock = jest.fn();
 
     const questionGenreScreen = shallow(
         <QuestionGenreScreen

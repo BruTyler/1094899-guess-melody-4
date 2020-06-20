@@ -9,11 +9,11 @@ import {GameType} from "../../const.js";
 class App extends PureComponent {
   constructor(props) {
     super(props);
-    
+
     this.state = {
       step: -1
     };
-    
+
     this.handleWelcomeButtonClick = this.handleWelcomeButtonClick.bind(this);
     this.handleAnswerSubmit = this.handleAnswerSubmit.bind(this);
   }
@@ -92,24 +92,7 @@ class App extends PureComponent {
 App.propTypes = {
   gameTime: PropTypes.number.isRequired,
   errorCount: PropTypes.number.isRequired,
-  questions: PropTypes.arrayOf(
-      PropTypes.shape({
-        type: PropTypes.oneOf([GameType.ARTIST, GameType.GENRE]).isRequired,
-        genre: PropTypes.string,
-        song: PropTypes.shape({
-          artist: PropTypes.string.isRequired,
-          src: PropTypes.string.isRequired,
-        }),
-        answers: PropTypes.arrayOf(
-            PropTypes.shape({
-              picture: PropTypes.string,
-              artist: PropTypes.string,
-              src: PropTypes.string,
-              genre: PropTypes.string,
-            })
-        ).isRequired
-      })
-  ).isRequired,
+  questions: PropTypes.arrayOf(PropTypes.shape()).isRequired,
 };
 
 export default App;
