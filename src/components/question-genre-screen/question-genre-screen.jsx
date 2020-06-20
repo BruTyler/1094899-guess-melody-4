@@ -2,13 +2,9 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {GameType} from "../../const.js";
 class QuestionGenreScreen extends PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      answers: [false, false, false, false],
-    };
-  }
+  state = {
+    answers: [false, false, false, false],
+  };
 
   render() {
     const {onAnswer, question} = this.props;
