@@ -70,7 +70,8 @@ class AudioPlayer extends PureComponent {
             ref={this._audioRef}
           />
         </div>
-      </React.Fragment>);
+      </React.Fragment>
+    );
   }
 
   componentDidUpdate() {

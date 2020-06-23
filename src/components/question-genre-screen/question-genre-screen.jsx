@@ -1,14 +1,16 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {GameType} from "../../const.js";
+import AudioPlayer from '../audio-player/audio-player.jsx';
 class QuestionGenreScreen extends PureComponent {
   state = {
     answers: [false, false, false, false],
+    activePlayerId: 0
   };
 
   render() {
     const {onAnswer, question} = this.props;
-    const {answers: userAnswers} = this.state;
+    const {answers: userAnswers, activePlayerId} = this.state;
     const {genre, answers} = question;
 
     return <section className="game__screen">
@@ -21,10 +23,15 @@ class QuestionGenreScreen extends PureComponent {
       >
         {answers.map((answer, index) => (
           <div className="track" key={`${index}-${answer.src}`}>
-            <button className="track__button track__button--play" type="button"></button>
-            <div className="track__status">
-              <audio src={answer.src}></audio>
-            </div>
+            <AudioPlayer
+              onPlayButtonClick={() => {
+                this.setState({
+                  activePlayerId: activePlayerId === index ? -1 : index,
+                });
+              }}
+              isPlaying={index === activePlayerId}
+              src={answer.src}
+            />
             <div className="game__answer">
               <input className="game__input visually-hidden" type="checkbox" name="answer" value={`answer-${index}`} id={`answer-${index}`}
                 checked={userAnswers[index]}
