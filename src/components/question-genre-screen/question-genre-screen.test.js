@@ -2,7 +2,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import QuestionGenreScreen from './question-genre-screen.jsx';
 
-const CLICKHANDLER = () => {};
+const EMPTY_HANDLER = () => {};
 const QUESTION = {
   type: `genre`,
   genre: `rock`,
@@ -25,7 +25,8 @@ describe(`QuestionGenreScreen render suit`, () => {
   it(`QuestionGenreScreen render case`, () => {
     const generatedTree = renderer.create(
         <QuestionGenreScreen
-          onAnswer={CLICKHANDLER}
+          onAnswer={EMPTY_HANDLER}
+          renderPlayer={EMPTY_HANDLER}
           question={QUESTION}
         />
     ).toJSON();

@@ -2,7 +2,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import QuestionArtistScreen from './question-artist-screen.jsx';
 
-const CLICKHANDLER = () => {};
+const EMPTY_HANDLER = () => {};
 const QUESTION = {
   type: `artist`,
   song: {
@@ -25,9 +25,14 @@ describe(`QuestionArtistScreen render suit`, () => {
   it(`QuestionArtistScreen render case`, () => {
     const generatedTree = renderer.create(
         <QuestionArtistScreen
-          onAnswer={CLICKHANDLER}
+          onAnswer={EMPTY_HANDLER}
+          renderPlayer={EMPTY_HANDLER}
           question={QUESTION}
-        />
+        />, {
+          createNodeMock: () => {
+            return {};
+          }
+        }
     ).toJSON();
 
     expect(generatedTree).toMatchSnapshot();
