@@ -55,5 +55,8 @@ exports[`<GameScreen /> render suit <GameScreen /> render case 1`] = `
       />
     </div>
   </header>
+  <div>
+    test
+  </div>
 </section>
 `;

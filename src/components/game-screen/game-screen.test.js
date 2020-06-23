@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer';
 import GameScreen from './game-screen.jsx';
 import {GameType} from "../../const.js";
 
-const CHILDREN_COMPONENT = () => <div>test</div>;
+const CHILDREN_COMPONENT = <div>test</div>;
 const GAME_TYPE = GameType.ARTIST;
 
 describe(`<GameScreen /> render suit`, () => {

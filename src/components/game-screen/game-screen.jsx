@@ -3,10 +3,6 @@ import PropTypes from 'prop-types';
 import {GameType} from "../../const.js";
 
 const GameScreen = ({gameType, children}) => {
-  // eslint-disable-next-line no-console
-  console.log(children);
-  // eslint-disable-next-line no-console
-  console.log(typeof (children));
 
   return <section className={`game game--${gameType}`}>
     <header className="game__header">
