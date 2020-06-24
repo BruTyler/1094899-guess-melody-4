@@ -7,6 +7,10 @@ describe(`<AudioPlayer /> e2e suite`, () => {
     const onPlayButtonClickMock = jest.fn();
     const defaultPlaying = false;
 
+    const pauseStub = jest
+      .spyOn(window.HTMLMediaElement.prototype, `pause`)
+      .mockImplementation(() => {});
+
     const audioPlayer = mount(
         <AudioPlayer
           src={`url`}
@@ -22,11 +26,11 @@ describe(`<AudioPlayer /> e2e suite`, () => {
 
     playButton.simulate(`click`);
     expect(audioPlayer.state(`isPlaying`)).toEqual(!defaultPlaying);
+    expect(pauseStub).toHaveBeenCalled();
 
     playButton.simulate(`click`);
     expect(audioPlayer.state(`isPlaying`)).toEqual(defaultPlaying);
 
     expect(onPlayButtonClickMock.mock.calls.length).toBe(2);
-
   });
 });
