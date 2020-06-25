@@ -2,6 +2,7 @@ import React from 'react';
 import {shallow} from 'enzyme';
 import QuestionArtistScreen from './question-artist-screen.jsx';
 
+const EMPTY_HANDLER = () => {};
 const QUESTION = {
   type: `artist`,
   song: {
@@ -28,6 +29,7 @@ describe(`QuestionArtistScreen e2e suite`, () => {
         <QuestionArtistScreen
           onAnswer={onAnswerMock}
           question={QUESTION}
+          renderPlayer={EMPTY_HANDLER}
         />
     );
 
@@ -47,6 +49,7 @@ describe(`QuestionArtistScreen e2e suite`, () => {
         <QuestionArtistScreen
           onAnswer={onAnswerMock}
           question={QUESTION}
+          renderPlayer={EMPTY_HANDLER}
         />
     );
 

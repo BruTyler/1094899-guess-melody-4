@@ -2,6 +2,7 @@ import React from 'react';
 import {shallow} from 'enzyme';
 import QuestionGenreScreen from './question-genre-screen.jsx';
 
+const EMPTY_HANDLER = () => {};
 const QUESTION = {
   type: `genre`,
   genre: `rock`,
@@ -28,6 +29,7 @@ describe(`QuestionGenreScreen e2e suite`, () => {
         <QuestionGenreScreen
           onAnswer={onAnswerMock}
           question={QUESTION}
+          renderPlayer={EMPTY_HANDLER}
         />
     );
 
@@ -47,6 +49,7 @@ describe(`QuestionGenreScreen e2e suite`, () => {
         <QuestionGenreScreen
           onAnswer={onAnswerMock}
           question={QUESTION}
+          renderPlayer={EMPTY_HANDLER}
         />
     );
 
