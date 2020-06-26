@@ -1,8 +1,13 @@
-import {extend} from "./utils.js";
+import {extend} from './utils.js';
+import questions from './mocks/questions.js';
+import settings from './mocks/settings.js';
+import {GameType} from './const.js';
 
 const initialState = {
   mistakes: 0,
   step: -1,
+  maxMistakes: settings.errorCount,
+  questionCount: questions.length,
 };
 
 const ActionType = {
@@ -11,14 +16,31 @@ const ActionType = {
 };
 
 const ActionCreator = {
-  incrementStep: () => ({
-    type: ActionType.INCREMENT_STEP,
-    payload: 1
-  }),
-  incrementMistakes: () => ({
-    type: ActionType.INCREMENT_MISTAKES,
-    payload: 1
-  }),
+  incrementStep: () => {
+    return {
+      type: ActionType.INCREMENT_STEP,
+      payload: 1,
+    };
+  },
+
+  incrementMistakes: (question, userAnswer) => {
+    let isAnswerCorrect = false;
+
+    switch (question.type) {
+      case (GameType.ARTIST):
+        isAnswerCorrect = userAnswer.artist === question.song.artist;
+        break;
+      case (GameType.GENRE):
+        const correctAnswers = question.answers.map((x) => x.genre === question.genre);
+        isAnswerCorrect = userAnswer.reduce((accumulatedResult, currentAnswer, index) => accumulatedResult && currentAnswer === correctAnswers[index]);
+        break;
+    }
+
+    return {
+      type: ActionType.INCREMENT_MISTAKES,
+      payload: isAnswerCorrect ? 0 : 1
+    };
+  },
 };
 
 const reducer = (state = initialState, action) => {
