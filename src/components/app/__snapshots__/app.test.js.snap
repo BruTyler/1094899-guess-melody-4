@@ -419,7 +419,7 @@ exports[`App render suit App renders WelcomeScreen 1`] = `
     </li>
     <li>
       Можно допустить 
-      2
+      3
        ошибки.
     </li>
   </ul>

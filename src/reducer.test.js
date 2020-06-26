@@ -37,7 +37,7 @@ const QUESTIONS = [
   }
 ];
 
-describe(`Reducer unit- test suit`, () => {
+describe(`Reducer unit- suit`, () => {
   it(`Reducer without additional parameters should return initial state`, () => {
     expect(reducer(void 0, {})).toEqual({
       step: -1,
@@ -52,7 +52,7 @@ describe(`Reducer unit- test suit`, () => {
       step: -1,
       mistakes: 0,
       maxMistakes: 3,
-      questionCount: QUESTIONS.length,
+      questionCount: 100,
     }, {
       type: ActionType.INCREMENT_STEP,
       payload: 2
@@ -61,9 +61,11 @@ describe(`Reducer unit- test suit`, () => {
       step: 1,
       mistakes: 0,
       maxMistakes: 3,
-      questionCount: QUESTIONS.length,
+      questionCount: 100,
     });
+  });
 
+  it(`Reducer should reset the game due the overflow of increment step by a value`, () => {
     expect(reducer({
       step: -1,
       mistakes: 0,
@@ -74,7 +76,7 @@ describe(`Reducer unit- test suit`, () => {
       payload: 100
     })
     ).toEqual({
-      step: 99,
+      step: -1,
       mistakes: 0,
       maxMistakes: 3,
       questionCount: QUESTIONS.length,
@@ -97,7 +99,9 @@ describe(`Reducer unit- test suit`, () => {
       maxMistakes: 3,
       questionCount: QUESTIONS.length,
     });
+  });
 
+  it(`Reducer should reset the game due the overflow of increment mistakes by a value`, () => {
     expect(reducer({
       step: -1,
       mistakes: 0,
@@ -109,7 +113,7 @@ describe(`Reducer unit- test suit`, () => {
     })
     ).toEqual({
       step: -1,
-      mistakes: 100,
+      mistakes: 0,
       maxMistakes: 3,
       questionCount: QUESTIONS.length,
     });
