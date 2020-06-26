@@ -1,7 +1,8 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import App from './app.jsx';
+import {App} from './app.jsx';
 
+const EMPTY_HANDLER = () => {};
 const TIME = 100;
 const ERROR = 2;
 const QUESTIONS = [
@@ -41,14 +42,59 @@ const QUESTIONS = [
 ];
 
 describe(`App render suit`, () => {
-  it(`App render case`, () => {
+  it(`App renders WelcomeScreen`, () => {
     const generatedTree = renderer.create(
         <App
           gameTime={TIME}
           errorCount={ERROR}
           questions={QUESTIONS}
+          onUserAnswer={EMPTY_HANDLER}
+          onWelcomeButtonClick={EMPTY_HANDLER}
+          step={-1}
         />
     ).toJSON();
+
+    expect(generatedTree).toMatchSnapshot();
+  });
+
+  it(`App renders GenreScreen`, () => {
+    const questionIndex = QUESTIONS.findIndex((x) => x.type === `genre`);
+    expect(questionIndex).not.toBe(-1);
+
+    const generatedTree = renderer.create(
+        <App
+          gameTime={TIME}
+          errorCount={ERROR}
+          questions={QUESTIONS}
+          onUserAnswer={EMPTY_HANDLER}
+          onWelcomeButtonClick={EMPTY_HANDLER}
+          step={questionIndex}
+        />, {
+          createNodeMock: () => {
+            return {};
+          }
+        }).toJSON();
+
+    expect(generatedTree).toMatchSnapshot();
+  });
+
+  it(`App renders ArtistScreen`, () => {
+    const questionIndex = QUESTIONS.findIndex((x) => x.type === `artist`);
+    expect(questionIndex).not.toBe(-1);
+
+    const generatedTree = renderer.create(
+        <App
+          gameTime={TIME}
+          errorCount={ERROR}
+          questions={QUESTIONS}
+          onUserAnswer={EMPTY_HANDLER}
+          onWelcomeButtonClick={EMPTY_HANDLER}
+          step={questionIndex}
+        />, {
+          createNodeMock: () => {
+            return {};
+          }
+        }).toJSON();
 
     expect(generatedTree).toMatchSnapshot();
   });
