@@ -15,6 +15,16 @@ const ActionType = {
   INCREMENT_STEP: `INCREMENT_STEP`,
 };
 
+const isArtistCorrect = (question, userAnswer) => {
+  return userAnswer.artist === question.song.artist;
+};
+
+const isGenreCorrect = (question, userAnswer) => {
+  const correctAnswers = question.answers.map((x) => x.genre === question.genre);
+  return userAnswer.reduce((accumulatedResult, currentAnswer, index) =>
+    accumulatedResult && currentAnswer === correctAnswers[index]);
+};
+
 const ActionCreator = {
   incrementStep: () => {
     return {
@@ -28,11 +38,10 @@ const ActionCreator = {
 
     switch (question.type) {
       case (GameType.ARTIST):
-        isAnswerCorrect = userAnswer.artist === question.song.artist;
+        isAnswerCorrect = isArtistCorrect(question, userAnswer);
         break;
       case (GameType.GENRE):
-        const correctAnswers = question.answers.map((x) => x.genre === question.genre);
-        isAnswerCorrect = userAnswer.reduce((accumulatedResult, currentAnswer, index) => accumulatedResult && currentAnswer === correctAnswers[index]);
+        isAnswerCorrect = isGenreCorrect(question, userAnswer);
         break;
     }
 
@@ -46,11 +55,23 @@ const ActionCreator = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.INCREMENT_STEP:
+      const nextStep = state.step + action.payload;
+
+      if (nextStep >= state.questionCount) {
+        return extend({}, initialState);
+      }
+
       return extend(state, {
-        step: state.step + action.payload,
+        step: nextStep,
       });
 
     case ActionType.INCREMENT_MISTAKES:
+      const mistakes = state.mistakes + action.payload;
+
+      if (mistakes >= state.maxMistakes) {
+        return extend({}, initialState);
+      }
+
       return extend(state, {
         mistakes: state.mistakes + action.payload,
       });
