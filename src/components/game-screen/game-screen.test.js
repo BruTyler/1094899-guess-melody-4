@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import GameScreen from './game-screen.jsx';
+import {GameScreen} from './game-screen.jsx';
 import {GameType} from "../../const.js";
 
 const CHILDREN_MARKUP = <div>test</div>;
