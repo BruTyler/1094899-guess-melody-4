@@ -1,6 +1,8 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {connect} from "react-redux";
+import {ActionCreator} from "../../reducer.js";
 
 import {GameType} from "../../const.js";
 import GameScreen from './../game-screen/game-screen.jsx';
@@ -13,41 +15,22 @@ const QuestionGenreScreenWrapped = withActivePlayer(QuestionGenreScreen);
 const QuestionArtistScreenWrapped = withActivePlayer(QuestionArtistScreen);
 
 class App extends PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      step: -1
-    };
-
-    this.handleWelcomeButtonClick = this.handleWelcomeButtonClick.bind(this);
-    this.handleAnswerSubmit = this.handleAnswerSubmit.bind(this);
-  }
-
-  handleWelcomeButtonClick() {
-    this.setState({
-      step: 0
-    });
-  }
-
-  handleAnswerSubmit() {
-    this.setState(
-        (prevState) => ({
-          step: prevState.step + 1
-        })
-    );
-  }
-
   _renderGameScreen() {
-    const {gameTime, errorCount, questions} = this.props;
-    const {step} = this.state;
+    const {
+      gameTime,
+      errorCount,
+      questions,
+      onUserAnswer,
+      onWelcomeButtonClick,
+      step,
+    } = this.props;
     const question = questions[step];
 
     if (step === -1 || step >= questions.length) {
       return <WelcomeScreen
         time={gameTime}
         error={errorCount}
-        onWelcomeButtonClick={this.handleWelcomeButtonClick}/>;
+        onWelcomeButtonClick={onWelcomeButtonClick}/>;
     }
 
     if (question) {
@@ -56,7 +39,7 @@ class App extends PureComponent {
           return (
             <GameScreen gameType={question.type}>
               <QuestionArtistScreenWrapped
-                onAnswer={this.handleAnswerSubmit}
+                onAnswer={onUserAnswer}
                 question={question}
               />
             </GameScreen>
@@ -65,7 +48,7 @@ class App extends PureComponent {
           return (
             <GameScreen gameType={question.type}>
               <QuestionGenreScreenWrapped
-                onAnswer={this.handleAnswerSubmit}
+                onAnswer={onUserAnswer}
                 question={question}
               />
             </GameScreen>);
@@ -108,6 +91,24 @@ App.propTypes = {
   gameTime: PropTypes.number.isRequired,
   errorCount: PropTypes.number.isRequired,
   questions: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  onUserAnswer: PropTypes.func.isRequired,
+  onWelcomeButtonClick: PropTypes.func.isRequired,
+  step: PropTypes.number.isRequired,
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+  step: state.step,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onWelcomeButtonClick() {
+    dispatch(ActionCreator.incrementStep());
+  },
+  onUserAnswer(question, userAnswer) {
+    dispatch(ActionCreator.incrementMistakes(question, userAnswer));
+    dispatch(ActionCreator.incrementStep());
+  },
+});
+
+export {App};
+export default connect(mapStateToProps, mapDispatchToProps)(App);
