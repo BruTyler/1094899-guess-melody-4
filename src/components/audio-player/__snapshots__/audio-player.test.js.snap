@@ -4,7 +4,7 @@ exports[`<AudioPlayer /> render suit <AudioPlayer /> render case 1`] = `
 Array [
   <button
     className="track__button track__button--pause"
-    disabled={true}
+    disabled={false}
     onClick={[Function]}
     type="button"
   />,

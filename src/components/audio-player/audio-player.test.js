@@ -15,8 +15,11 @@ describe(`<AudioPlayer /> render suit`, () => {
         <AudioPlayer
           src={QUESTION_ARTIST.song.src}
           isPlaying={true}
+          isLoading={false}
           onPlayButtonClick={CLICKHANDLER}
-        />,
+        >
+          <audio />
+        </AudioPlayer>,
         {
           createNodeMock: () => {
             return {};
