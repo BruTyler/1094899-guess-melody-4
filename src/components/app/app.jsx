@@ -9,7 +9,7 @@ import GameScreen from './../game-screen/game-screen.jsx';
 import WelcomeScreen from './../welcome-screen/welcome-screen.jsx';
 import QuestionGenreScreen from '../question-genre-screen/question-genre-screen.jsx';
 import QuestionArtistScreen from '../question-artist-screen/question-artist-screen.jsx';
-import withActivePlayer from '../../hocs/with-audio-player/with-audio-player.jsx';
+import withActivePlayer from '../../hocs/with-active-player/with-active-player.jsx';
 
 const QuestionGenreScreenWrapped = withActivePlayer(QuestionGenreScreen);
 const QuestionArtistScreenWrapped = withActivePlayer(QuestionArtistScreen);

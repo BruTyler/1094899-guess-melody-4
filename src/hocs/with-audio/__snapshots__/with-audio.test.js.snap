@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`withAudio render suit withAudio render case 1`] = `
+<div>
+  <audio />
+</div>
+`;
