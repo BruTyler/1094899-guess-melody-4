@@ -1,9 +1,14 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import App from './app.jsx';
+import {Provider} from 'react-redux';
+import configureStore from 'redux-mock-store';
+import {App} from './app.jsx';
 
+const mockStore = configureStore();
+
+const EMPTY_HANDLER = () => {};
 const TIME = 100;
-const ERROR = 2;
+const ERRORS = 3;
 const QUESTIONS = [
   {
     type: `genre`,
@@ -41,13 +46,79 @@ const QUESTIONS = [
 ];
 
 describe(`App render suit`, () => {
-  it(`App render case`, () => {
+  it(`App renders WelcomeScreen`, () => {
+    const store = mockStore({
+      mistakes: 0,
+    });
+
     const generatedTree = renderer.create(
-        <App
-          gameTime={TIME}
-          errorCount={ERROR}
-          questions={QUESTIONS}
-        />
+        <Provider store={store}>
+          <App
+            gameTime={TIME}
+            errorCount={ERRORS}
+            questions={QUESTIONS}
+            onUserAnswer={EMPTY_HANDLER}
+            onWelcomeButtonClick={EMPTY_HANDLER}
+            step={-1}
+          />
+        </Provider>
+    ).toJSON();
+
+    expect(generatedTree).toMatchSnapshot();
+  });
+
+  it(`App renders GenreScreen`, () => {
+    const store = mockStore({
+      mistakes: 3,
+    });
+
+    const questionIndex = QUESTIONS.findIndex((x) => x.type === `genre`);
+    expect(questionIndex).not.toBe(-1);
+
+    const generatedTree = renderer.create(
+        <Provider store={store}>
+          <App
+            gameTime={TIME}
+            errorCount={ERRORS}
+            questions={QUESTIONS}
+            onUserAnswer={EMPTY_HANDLER}
+            onWelcomeButtonClick={EMPTY_HANDLER}
+            step={questionIndex}
+          />
+        </Provider>, {
+          createNodeMock: () => {
+            return {};
+          }
+        }
+    ).toJSON();
+
+    expect(generatedTree).toMatchSnapshot();
+  });
+
+  it(`App renders ArtistScreen`, () => {
+    const store = mockStore({
+      mistakes: 3,
+    });
+
+    const questionIndex = QUESTIONS.findIndex((x) => x.type === `artist`);
+    expect(questionIndex).not.toBe(-1);
+
+    const generatedTree = renderer.create(
+        <Provider store={store}>
+          <App
+            gameTime={TIME}
+            errorCount={ERRORS}
+            questions={QUESTIONS}
+            onUserAnswer={EMPTY_HANDLER}
+            onWelcomeButtonClick={EMPTY_HANDLER}
+            step={questionIndex}
+          />
+        </Provider>
+        , {
+          createNodeMock: () => {
+            return {};
+          }
+        }
     ).toJSON();
 
     expect(generatedTree).toMatchSnapshot();
