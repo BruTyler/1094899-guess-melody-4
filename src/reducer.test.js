@@ -65,8 +65,7 @@ describe(`Reducer unit- suit`, () => {
     });
   });
 
-  /*
-  it(`Reducer should reset the game due the overflow of increment step by a value`, () => {
+  it(`Reducer should increment step by a value and should not reset the game`, () => {
     expect(reducer({
       step: -1,
       mistakes: 0,
@@ -77,13 +76,12 @@ describe(`Reducer unit- suit`, () => {
       payload: 100
     })
     ).toEqual({
-      step: -1,
+      step: 99,
       mistakes: 0,
       maxMistakes: 3,
       questionCount: QUESTIONS.length,
     });
   });
-  */
 
   it(`Reducer should increment mistakes by a value`, () => {
     expect(reducer({
@@ -103,8 +101,7 @@ describe(`Reducer unit- suit`, () => {
     });
   });
 
-  /*
-  it(`Reducer should reset the game due the overflow of increment mistakes by a value`, () => {
+  it(`Reducer should increment mistakes by a value and should not reset game`, () => {
     expect(reducer({
       step: -1,
       mistakes: 0,
@@ -116,12 +113,11 @@ describe(`Reducer unit- suit`, () => {
     })
     ).toEqual({
       step: -1,
-      mistakes: 0,
+      mistakes: 100,
       maxMistakes: 3,
       questionCount: QUESTIONS.length,
     });
   });
-  */
 
   it(`Reducer should increment mistakes in genre- game using action`, () => {
     const genreQuestion = QUESTIONS.find((x) => x.type === GameType.GENRE);
@@ -187,6 +183,38 @@ describe(`Reducer unit- suit`, () => {
       maxMistakes: 3,
       questionCount: QUESTIONS.length,
     }, ActionCreator.incrementMistakes(artistQuestion, correctAnswer))
+    ).toEqual({
+      step: -1,
+      mistakes: 0,
+      maxMistakes: 3,
+      questionCount: QUESTIONS.length,
+    });
+  });
+
+  it(`Reducer should reset the game using action`, () => {
+    expect(reducer({
+      step: 3,
+      mistakes: 3,
+      maxMistakes: 3,
+      questionCount: QUESTIONS.length,
+    }, ActionCreator.resetGame())
+    ).toEqual({
+      step: -1,
+      mistakes: 0,
+      maxMistakes: 3,
+      questionCount: QUESTIONS.length,
+    });
+  });
+
+  it(`Reducer should reset the game using object`, () => {
+    expect(reducer({
+      step: 3,
+      mistakes: 3,
+      maxMistakes: 3,
+      questionCount: QUESTIONS.length,
+    }, {
+      type: ActionType.RESET_GAME,
+    })
     ).toEqual({
       step: -1,
       mistakes: 0,
