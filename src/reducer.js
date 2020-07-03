@@ -57,9 +57,9 @@ const reducer = (state = initialState, action) => {
     case ActionType.INCREMENT_STEP:
       const nextStep = state.step + action.payload;
 
-      if (nextStep >= state.questionCount) {
+      /* if (nextStep >= state.questionCount) {
         return extend({}, initialState);
-      }
+      } */
 
       return extend(state, {
         step: nextStep,
@@ -68,12 +68,14 @@ const reducer = (state = initialState, action) => {
     case ActionType.INCREMENT_MISTAKES:
       const mistakes = state.mistakes + action.payload;
 
+      /*
       if (mistakes >= state.maxMistakes) {
         return extend({}, initialState);
       }
+      */
 
       return extend(state, {
-        mistakes: state.mistakes + action.payload,
+        mistakes,
       });
   }
 
