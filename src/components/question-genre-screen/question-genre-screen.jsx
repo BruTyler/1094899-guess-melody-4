@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {GameType} from '../../const.js';
+import QuestionGenreItem from '../question-genre-item/question-genre-item.jsx';
 
 const QuestionGenreScreen = (props) => {
   const {onAnswer, question, renderPlayer, onAnswerChange, userAnswers} = props;
@@ -14,21 +15,16 @@ const QuestionGenreScreen = (props) => {
         onAnswer();
       }}
     >
-      {answers.map((answer, index) => (
-        <div className="track" key={`${index}-${answer.src}`}>
-          {renderPlayer(answer.src, index)}
-          <div className="game__answer">
-            <input className="game__input visually-hidden" type="checkbox" name="answer" value={`answer-${index}`} id={`answer-${index}`}
-              checked={userAnswers[index]}
-              onChange={(event) => {
-                const value = event.target.checked;
-                onAnswerChange(index, value);
-              }}
-            />
-            <label className="game__check" htmlFor={`answer-${index}`}>Отметить</label>
-          </div>
-        </div>
-      ))}
+      {answers.map((answer, index) =>
+        <QuestionGenreItem
+          key={`${index}-${answer.src}`}
+          index={index}
+          isChecked={userAnswers[index]}
+          answerSrc={answer.src}
+          renderPlayer={renderPlayer}
+          onAnswerChange={onAnswerChange}
+        />
+      )}
 
       <button className="game__submit button" type="submit">Ответить</button>
     </form>

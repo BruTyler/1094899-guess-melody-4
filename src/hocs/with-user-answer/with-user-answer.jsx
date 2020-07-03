@@ -16,8 +16,8 @@ const withUserAnswer = (Component) => {
 
     handleAnswerSubmit() {
       const {onAnswer, question} = this.props;
-      const {answers} = this.state;
-      onAnswer(question, answers);
+      const {userAnswers} = this.state;
+      onAnswer(question, userAnswers);
     }
 
     handleAnswerChange(index, value) {

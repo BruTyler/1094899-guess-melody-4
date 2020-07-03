@@ -1,5 +1,5 @@
 import React from 'react';
-import {shallow} from 'enzyme';
+import {mount} from 'enzyme';
 import QuestionGenreScreen from './question-genre-screen.jsx';
 
 const EMPTY_HANDLER = () => {};
@@ -26,7 +26,7 @@ describe(`QuestionGenreScreen e2e suite`, () => {
   it(`QuestionGenreScreen answer is sended`, () => {
     const onAnswerMock = jest.fn();
 
-    const questionGenreScreen = shallow(
+    const questionGenreScreen = mount(
         <QuestionGenreScreen
           onAnswer={onAnswerMock}
           question={QUESTION}
@@ -47,7 +47,7 @@ describe(`QuestionGenreScreen e2e suite`, () => {
   it(`QuestionGenreScreen answer- callback doesn't contain user- answers`, () => {
     const onAnswerMock = jest.fn();
 
-    const questionGenreScreen = shallow(
+    const questionGenreScreen = mount(
         <QuestionGenreScreen
           onAnswer={onAnswerMock}
           question={QUESTION}
@@ -71,7 +71,7 @@ describe(`QuestionGenreScreen e2e suite`, () => {
   it(`QuestionGenreScreen answer-change callback contains new answer- value`, () => {
     const onAnswerChangeMock = jest.fn();
 
-    const questionGenreScreen = shallow(
+    const questionGenreScreen = mount(
         <QuestionGenreScreen
           onAnswer={EMPTY_HANDLER}
           question={QUESTION}
