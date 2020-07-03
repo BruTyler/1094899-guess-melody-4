@@ -40,10 +40,19 @@ const withAudio = (Component) => {
       });
     }
 
+    // eslint-disable-next-line camelcase
+    UNSAFE_componentWillReceiveProps(nextProps) {
+      if (nextProps.isPlaying !== this.state.isPlaying) {
+        this.setState({
+          isPlaying: nextProps.isPlaying,
+        });
+      }
+    }
+
     componentDidUpdate() {
       const audio = this._audioRef.current;
 
-      if (this.props.isPlaying) {
+      if (this.state.isPlaying) {
         audio.play();
       } else {
         audio.pause();
