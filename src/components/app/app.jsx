@@ -1,10 +1,10 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
-import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer.js";
+import {connect} from 'react-redux';
+import {ActionCreator} from '../../reducer/game/game.js';
 
-import {GameType} from "../../const.js";
+import {GameType} from '../../const.js';
 import GameScreen from './../game-screen/game-screen.jsx';
 import WelcomeScreen from './../welcome-screen/welcome-screen.jsx';
 import QuestionGenreScreen from '../question-genre-screen/question-genre-screen.jsx';

@@ -1,5 +1,5 @@
-import {reducer, ActionType, ActionCreator} from "./reducer.js";
-import {GameType} from './const.js';
+import {reducer, ActionType, ActionCreator} from "./game.js";
+import {GameType} from '../../const.js';
 
 const QUESTIONS = [
   {
@@ -37,22 +37,20 @@ const QUESTIONS = [
   }
 ];
 
-describe(`Reducer unit- suit`, () => {
-  it(`Reducer without additional parameters should return initial state`, () => {
+describe(`Game reducer unit-tests`, () => {
+  it(`Game reducer without additional parameters should return initial state`, () => {
     expect(reducer(void 0, {})).toEqual({
       step: -1,
       mistakes: 0,
       maxMistakes: 3,
-      questions: [],
     });
   });
 
-  it(`Reducer should increment step by a value`, () => {
+  it(`Game reducer should increment step by a value`, () => {
     expect(reducer({
       step: -1,
       mistakes: 0,
       maxMistakes: 3,
-      questions: [],
     }, {
       type: ActionType.INCREMENT_STEP,
       payload: 2
@@ -61,16 +59,14 @@ describe(`Reducer unit- suit`, () => {
       step: 1,
       mistakes: 0,
       maxMistakes: 3,
-      questions: [],
     });
   });
 
-  it(`Reducer should increment step by a value and should not reset the game`, () => {
+  it(`Game reducer should increment step by a value and should not reset the game`, () => {
     expect(reducer({
       step: -1,
       mistakes: 0,
       maxMistakes: 3,
-      questions: [],
     }, {
       type: ActionType.INCREMENT_STEP,
       payload: 100
@@ -79,16 +75,14 @@ describe(`Reducer unit- suit`, () => {
       step: 99,
       mistakes: 0,
       maxMistakes: 3,
-      questions: [],
     });
   });
 
-  it(`Reducer should increment mistakes by a value`, () => {
+  it(`Game reducer should increment mistakes by a value`, () => {
     expect(reducer({
       step: -1,
       mistakes: 0,
       maxMistakes: 3,
-      questions: [],
     }, {
       type: ActionType.INCREMENT_MISTAKES,
       payload: 1
@@ -97,29 +91,10 @@ describe(`Reducer unit- suit`, () => {
       step: -1,
       mistakes: 1,
       maxMistakes: 3,
-      questions: [],
     });
   });
 
-  it(`Reducer should increment mistakes by a value and should not reset game`, () => {
-    expect(reducer({
-      step: -1,
-      mistakes: 0,
-      maxMistakes: 3,
-      questions: [],
-    }, {
-      type: ActionType.INCREMENT_MISTAKES,
-      payload: 100
-    })
-    ).toEqual({
-      step: -1,
-      mistakes: 100,
-      maxMistakes: 3,
-      questions: [],
-    });
-  });
-
-  it(`Reducer should increment mistakes in genre- game using action`, () => {
+  it(`Game reducer should increment mistakes in genre- game using action`, () => {
     const genreQuestion = QUESTIONS.find((x) => x.type === GameType.GENRE);
     const incorrectAnswers = genreQuestion.answers.map((x) => x.genre !== genreQuestion.genre);
 
@@ -127,31 +102,11 @@ describe(`Reducer unit- suit`, () => {
       step: -1,
       mistakes: 0,
       maxMistakes: 3,
-      questions: [],
     }, ActionCreator.incrementMistakes(genreQuestion, incorrectAnswers))
     ).toEqual({
       step: -1,
       mistakes: 1,
       maxMistakes: 3,
-      questions: [],
-    });
-  });
-
-  it(`Reducer should NOT increment mistakes in genre- game using action`, () => {
-    const genreQuestion = QUESTIONS.find((x) => x.type === GameType.GENRE);
-    const correctAnswers = genreQuestion.answers.map((x) => x.genre === genreQuestion.genre);
-
-    expect(reducer({
-      step: -1,
-      mistakes: 0,
-      maxMistakes: 3,
-      questions: [],
-    }, ActionCreator.incrementMistakes(genreQuestion, correctAnswers))
-    ).toEqual({
-      step: -1,
-      mistakes: 0,
-      maxMistakes: 3,
-      questions: [],
     });
   });
 
@@ -163,63 +118,39 @@ describe(`Reducer unit- suit`, () => {
       step: -1,
       mistakes: 0,
       maxMistakes: 3,
-      questions: [],
     }, ActionCreator.incrementMistakes(artistQuestion, incorrectAnswer))
     ).toEqual({
       step: -1,
       mistakes: 1,
       maxMistakes: 3,
-      questions: [],
     });
   });
 
-  it(`Reducer should NOT increment mistakes in artist- game using action`, () => {
-    const artistQuestion = QUESTIONS.find((x) => x.type === GameType.ARTIST);
-    const correctAnswer = {artist: artistQuestion.song.artist};
-
-    expect(reducer({
-      step: -1,
-      mistakes: 0,
-      maxMistakes: 3,
-      questions: [],
-    }, ActionCreator.incrementMistakes(artistQuestion, correctAnswer))
-    ).toEqual({
-      step: -1,
-      mistakes: 0,
-      maxMistakes: 3,
-      questions: [],
-    });
-  });
-
-  it(`Reducer should reset the game using action`, () => {
+  it(`Game reducer should reset the game using action`, () => {
     expect(reducer({
       step: 3,
       mistakes: 3,
       maxMistakes: 3,
-      questions: [],
     }, ActionCreator.resetGame())
     ).toEqual({
-      step: -1,
+      step: 0,
       mistakes: 0,
       maxMistakes: 3,
-      questions: [],
     });
   });
 
-  it(`Reducer should reset the game using object`, () => {
+  it(`Game reducer should reset the game using object`, () => {
     expect(reducer({
       step: 3,
       mistakes: 3,
       maxMistakes: 3,
-      questions: [],
     }, {
       type: ActionType.RESET_GAME,
     })
     ).toEqual({
-      step: -1,
+      step: 0,
       mistakes: 0,
       maxMistakes: 3,
-      questions: [],
     });
   });
 });
