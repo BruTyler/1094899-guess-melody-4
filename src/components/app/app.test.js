@@ -3,8 +3,9 @@ import renderer from 'react-test-renderer';
 import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
 import AppWithStore, {App} from './app.jsx';
+import NameSpace from '../../reducer/name-space.js';
 
-const mockStore = configureStore();
+const mockStore = configureStore([]);
 
 const EMPTY_HANDLER = () => {};
 const MAX_ERRORS = 3;
@@ -47,10 +48,13 @@ const QUESTIONS = [
 describe(`App render suit`, () => {
   it(`App connected with Store renders WelcomeScreen`, () => {
     const store = mockStore({
-      mistakes: 0,
-      maxMistakes: MAX_ERRORS,
-      questions: QUESTIONS,
-      step: -1,
+      [NameSpace.GAME]: {
+        step: -1,
+        maxMistakes: MAX_ERRORS,
+      },
+      [NameSpace.DATA]: {
+        questions: [],
+      },
     });
 
     const generatedTree = renderer.create(
@@ -84,7 +88,9 @@ describe(`App render suit`, () => {
 
   it(`App renders GenreScreen`, () => {
     const store = mockStore({
-      mistakes: 3,
+      [NameSpace.GAME]: {
+        mistakes: MAX_ERRORS,
+      },
     });
 
     const questionIndex = QUESTIONS.findIndex((x) => x.type === `genre`);
@@ -113,7 +119,9 @@ describe(`App render suit`, () => {
 
   it(`App renders ArtistScreen`, () => {
     const store = mockStore({
-      mistakes: 3,
+      [NameSpace.GAME]: {
+        mistakes: MAX_ERRORS,
+      },
     });
 
     const questionIndex = QUESTIONS.findIndex((x) => x.type === `artist`);

@@ -6,7 +6,7 @@ import thunk from 'redux-thunk';
 
 import App from './components/app/app.jsx';
 import reducer from './reducer/reducer.js';
-import {Operation} from './reducer/data/data.js';
+import {Operation as DataOperation} from './reducer/data/data.js';
 import {createAPI} from './api.js';
 
 const onUnauthorized = () => {};
@@ -20,7 +20,7 @@ const store = createStore(
     )
 );
 
-store.dispatch(Operation.loadQuestions());
+store.dispatch(DataOperation.loadQuestions());
 
 const init = () => {
   ReactDOM.render(

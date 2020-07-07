@@ -1,4 +1,4 @@
-import {reducer, ActionType, ActionCreator} from "./game.js";
+import {reducer, ActionType, ActionCreator} from './game.js';
 import {GameType} from '../../const.js';
 
 const QUESTIONS = [
