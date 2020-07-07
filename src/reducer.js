@@ -1,13 +1,11 @@
 import {extend} from './utils.js';
-import questions from './mocks/questions.js';
-import settings from './mocks/settings.js';
 import {GameType} from './const.js';
 
 const initialState = {
   mistakes: 0,
   step: -1,
-  maxMistakes: settings.errorCount,
-  questionCount: questions.length,
+  maxMistakes: 3,
+  questions: [],
 };
 
 const ActionType = {

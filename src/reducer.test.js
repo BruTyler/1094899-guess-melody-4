@@ -43,7 +43,7 @@ describe(`Reducer unit- suit`, () => {
       step: -1,
       mistakes: 0,
       maxMistakes: 3,
-      questionCount: QUESTIONS.length,
+      questions: [],
     });
   });
 
@@ -52,7 +52,7 @@ describe(`Reducer unit- suit`, () => {
       step: -1,
       mistakes: 0,
       maxMistakes: 3,
-      questionCount: 100,
+      questions: [],
     }, {
       type: ActionType.INCREMENT_STEP,
       payload: 2
@@ -61,7 +61,7 @@ describe(`Reducer unit- suit`, () => {
       step: 1,
       mistakes: 0,
       maxMistakes: 3,
-      questionCount: 100,
+      questions: [],
     });
   });
 
@@ -70,7 +70,7 @@ describe(`Reducer unit- suit`, () => {
       step: -1,
       mistakes: 0,
       maxMistakes: 3,
-      questionCount: QUESTIONS.length,
+      questions: [],
     }, {
       type: ActionType.INCREMENT_STEP,
       payload: 100
@@ -79,7 +79,7 @@ describe(`Reducer unit- suit`, () => {
       step: 99,
       mistakes: 0,
       maxMistakes: 3,
-      questionCount: QUESTIONS.length,
+      questions: [],
     });
   });
 
@@ -88,7 +88,7 @@ describe(`Reducer unit- suit`, () => {
       step: -1,
       mistakes: 0,
       maxMistakes: 3,
-      questionCount: QUESTIONS.length,
+      questions: [],
     }, {
       type: ActionType.INCREMENT_MISTAKES,
       payload: 1
@@ -97,7 +97,7 @@ describe(`Reducer unit- suit`, () => {
       step: -1,
       mistakes: 1,
       maxMistakes: 3,
-      questionCount: QUESTIONS.length,
+      questions: [],
     });
   });
 
@@ -106,7 +106,7 @@ describe(`Reducer unit- suit`, () => {
       step: -1,
       mistakes: 0,
       maxMistakes: 3,
-      questionCount: QUESTIONS.length,
+      questions: [],
     }, {
       type: ActionType.INCREMENT_MISTAKES,
       payload: 100
@@ -115,7 +115,7 @@ describe(`Reducer unit- suit`, () => {
       step: -1,
       mistakes: 100,
       maxMistakes: 3,
-      questionCount: QUESTIONS.length,
+      questions: [],
     });
   });
 
@@ -127,13 +127,13 @@ describe(`Reducer unit- suit`, () => {
       step: -1,
       mistakes: 0,
       maxMistakes: 3,
-      questionCount: QUESTIONS.length,
+      questions: [],
     }, ActionCreator.incrementMistakes(genreQuestion, incorrectAnswers))
     ).toEqual({
       step: -1,
       mistakes: 1,
       maxMistakes: 3,
-      questionCount: QUESTIONS.length,
+      questions: [],
     });
   });
 
@@ -145,13 +145,13 @@ describe(`Reducer unit- suit`, () => {
       step: -1,
       mistakes: 0,
       maxMistakes: 3,
-      questionCount: QUESTIONS.length,
+      questions: [],
     }, ActionCreator.incrementMistakes(genreQuestion, correctAnswers))
     ).toEqual({
       step: -1,
       mistakes: 0,
       maxMistakes: 3,
-      questionCount: QUESTIONS.length,
+      questions: [],
     });
   });
 
@@ -163,13 +163,13 @@ describe(`Reducer unit- suit`, () => {
       step: -1,
       mistakes: 0,
       maxMistakes: 3,
-      questionCount: QUESTIONS.length,
+      questions: [],
     }, ActionCreator.incrementMistakes(artistQuestion, incorrectAnswer))
     ).toEqual({
       step: -1,
       mistakes: 1,
       maxMistakes: 3,
-      questionCount: QUESTIONS.length,
+      questions: [],
     });
   });
 
@@ -181,13 +181,13 @@ describe(`Reducer unit- suit`, () => {
       step: -1,
       mistakes: 0,
       maxMistakes: 3,
-      questionCount: QUESTIONS.length,
+      questions: [],
     }, ActionCreator.incrementMistakes(artistQuestion, correctAnswer))
     ).toEqual({
       step: -1,
       mistakes: 0,
       maxMistakes: 3,
-      questionCount: QUESTIONS.length,
+      questions: [],
     });
   });
 
@@ -196,13 +196,13 @@ describe(`Reducer unit- suit`, () => {
       step: 3,
       mistakes: 3,
       maxMistakes: 3,
-      questionCount: QUESTIONS.length,
+      questions: [],
     }, ActionCreator.resetGame())
     ).toEqual({
       step: -1,
       mistakes: 0,
       maxMistakes: 3,
-      questionCount: QUESTIONS.length,
+      questions: [],
     });
   });
 
@@ -211,7 +211,7 @@ describe(`Reducer unit- suit`, () => {
       step: 3,
       mistakes: 3,
       maxMistakes: 3,
-      questionCount: QUESTIONS.length,
+      questions: [],
     }, {
       type: ActionType.RESET_GAME,
     })
@@ -219,7 +219,7 @@ describe(`Reducer unit- suit`, () => {
       step: -1,
       mistakes: 0,
       maxMistakes: 3,
-      questionCount: QUESTIONS.length,
+      questions: [],
     });
   });
 });

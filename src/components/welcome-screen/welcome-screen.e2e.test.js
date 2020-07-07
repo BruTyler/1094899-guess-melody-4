@@ -9,7 +9,6 @@ describe(`WelcomeScreen suite`, () => {
     const welcomeScreen = shallow(
         <WelcomeScreen
           error={5}
-          time={3}
           onWelcomeButtonClick={onWelcomeButtonHandler}
         />
     );

@@ -20,7 +20,6 @@ const QuestionArtistScreenWrapped = withActivePlayer(QuestionArtistScreen);
 class App extends PureComponent {
   _renderGameScreen() {
     const {
-      gameTime,
       errorCount,
       questions,
       onUserAnswer,
@@ -33,7 +32,6 @@ class App extends PureComponent {
 
     if (step === -1) {
       return <WelcomeScreen
-        time={gameTime}
         error={errorCount}
         onWelcomeButtonClick={onWelcomeButtonClick}/>;
     } else if (currentGameMistakes >= errorCount) {
@@ -76,26 +74,10 @@ class App extends PureComponent {
   }
 
   render() {
-    const {questions} = this.props;
-
     return <BrowserRouter>
       <Switch>
         <Route exact path="/">
           {this._renderGameScreen()}
-        </Route>
-        <Route exact path="/dev-artist">
-          <GameScreen gameType={GameType.ARTIST}>
-            <QuestionArtistScreenWrapped
-              onAnswer={() => {}}
-              question={questions[1]}/>
-          </GameScreen>;
-        </Route>
-        <Route exact path="/dev-genre">
-          <GameScreen gameType={GameType.GENRE}>
-            <QuestionGenreScreenWrapped
-              onAnswer={() => {}}
-              question={questions[0]}/>
-          </GameScreen>;
         </Route>
       </Switch>
     </BrowserRouter>;
@@ -103,7 +85,6 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  gameTime: PropTypes.number.isRequired,
   errorCount: PropTypes.number.isRequired,
   questions: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   onUserAnswer: PropTypes.func.isRequired,
@@ -114,8 +95,10 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
+  questions: state.questions,
   step: state.step,
-  currentGameMistakes: state.mistakes
+  errorCount: state.maxMistakes,
+  currentGameMistakes: state.mistakes,
 });
 
 const mapDispatchToProps = (dispatch) => ({
