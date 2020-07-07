@@ -10,7 +10,7 @@ const AudioPlayer = (props) => {
         className={`track__button track__button--${isPlaying ? `pause` : `play`}`}
         type="button"
         disabled={isLoading}
-        onClick={() => onPlayButtonClick()}
+        onClick={onPlayButtonClick}
       />
       <div className="track__status">
         {children}
