@@ -9,7 +9,7 @@ const GameOverScreen = ({onReplayButtonClick}) => (
     <button className="replay" type="button" onClick={onReplayButtonClick}>
         Попробовать ещё раз
     </button>
-  </section>;
+  </section>
 );
 
 GameOverScreen.propTypes = {

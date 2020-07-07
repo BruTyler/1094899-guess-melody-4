@@ -9,7 +9,7 @@ const GameWinScreen = ({onReplayButtonClick, mistakesCount, answeredQuestionsCou
     <button className="replay" type="button" onClick={onReplayButtonClick}>
       Сыграть ещё раз
     </button>
-  </section>;
+  </section>
 );
 
 GameWinScreen.propTypes = {
