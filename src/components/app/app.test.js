@@ -60,6 +60,8 @@ describe(`App render suit`, () => {
             onUserAnswer={EMPTY_HANDLER}
             onWelcomeButtonClick={EMPTY_HANDLER}
             step={-1}
+            onResetGame={EMPTY_HANDLER}
+            currentGameMistakes={0}
           />
         </Provider>
     ).toJSON();
@@ -84,6 +86,8 @@ describe(`App render suit`, () => {
             onUserAnswer={EMPTY_HANDLER}
             onWelcomeButtonClick={EMPTY_HANDLER}
             step={questionIndex}
+            onResetGame={EMPTY_HANDLER}
+            currentGameMistakes={0}
           />
         </Provider>, {
           createNodeMock: () => {
