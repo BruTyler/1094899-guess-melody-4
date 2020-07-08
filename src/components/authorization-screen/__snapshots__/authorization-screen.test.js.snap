@@ -27,6 +27,7 @@ exports[`<AuthorizationScreen /> render suit <AuthorizationScreen /> render case
   <form
     action=""
     className="login__form"
+    onSubmit={[Function]}
   >
     <p
       className="login__field"
@@ -38,6 +39,7 @@ exports[`<AuthorizationScreen /> render suit <AuthorizationScreen /> render case
         Логин
       </label>
       <input
+        autoComplete="email"
         className="login__input"
         id="name"
         name="name"
@@ -54,6 +56,7 @@ exports[`<AuthorizationScreen /> render suit <AuthorizationScreen /> render case
         Пароль
       </label>
       <input
+        autoComplete="current-password"
         className="login__input"
         id="password"
         name="password"
@@ -67,7 +70,6 @@ exports[`<AuthorizationScreen /> render suit <AuthorizationScreen /> render case
     </p>
     <button
       className="login__button button"
-      onClick={[Function]}
       type="submit"
     >
       Войти
@@ -75,6 +77,7 @@ exports[`<AuthorizationScreen /> render suit <AuthorizationScreen /> render case
   </form>
   <button
     className="replay"
+    onClick={[Function]}
     type="button"
   >
     Сыграть ещё раз

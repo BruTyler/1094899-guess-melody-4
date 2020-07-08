@@ -6,6 +6,7 @@ describe(`<AuthorizationScreen /> render suit`, () => {
   it(`<AuthorizationScreen /> render case`, () => {
     const generatedTree = renderer.create(
         <AuthorizationScreen
+          onLoginSubmit={() => {}}
           onReplayButtonClick={() => {}}
         />
     ).toJSON();

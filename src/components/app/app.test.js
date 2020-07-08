@@ -4,6 +4,7 @@ import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
 import AppWithStore, {App} from './app.jsx';
 import NameSpace from '../../reducer/name-space.js';
+import {AuthorizationStatus} from '../../const.js';
 
 const mockStore = configureStore([]);
 
@@ -50,10 +51,14 @@ describe(`App render suit`, () => {
     const store = mockStore({
       [NameSpace.GAME]: {
         step: -1,
+        mistakes: 0,
         maxMistakes: MAX_ERRORS,
       },
       [NameSpace.DATA]: {
         questions: [],
+      },
+      [NameSpace.USER]: {
+        authorizationStatus: AuthorizationStatus.NO_AUTH,
       },
     });
 
@@ -63,6 +68,7 @@ describe(`App render suit`, () => {
             onUserAnswer={EMPTY_HANDLER}
             onWelcomeButtonClick={EMPTY_HANDLER}
             onResetGame={EMPTY_HANDLER}
+            onLoginSubmit={EMPTY_HANDLER}
           />
         </Provider>
     ).toJSON();
@@ -79,7 +85,9 @@ describe(`App render suit`, () => {
           onWelcomeButtonClick={EMPTY_HANDLER}
           step={-1}
           onResetGame={EMPTY_HANDLER}
+          onLoginSubmit={EMPTY_HANDLER}
           currentGameMistakes={0}
+          authorizationStatus={AuthorizationStatus.NO_AUTH}
         />
     ).toJSON();
 
@@ -105,7 +113,9 @@ describe(`App render suit`, () => {
             onWelcomeButtonClick={EMPTY_HANDLER}
             step={questionIndex}
             onResetGame={EMPTY_HANDLER}
+            onLoginSubmit={EMPTY_HANDLER}
             currentGameMistakes={0}
+            authorizationStatus={AuthorizationStatus.NO_AUTH}
           />
         </Provider>, {
           createNodeMock: () => {
@@ -137,6 +147,8 @@ describe(`App render suit`, () => {
             step={questionIndex}
             onResetGame={EMPTY_HANDLER}
             currentGameMistakes={0}
+            onLoginSubmit={EMPTY_HANDLER}
+            authorizationStatus={AuthorizationStatus.NO_AUTH}
           />
         </Provider>
         , {
