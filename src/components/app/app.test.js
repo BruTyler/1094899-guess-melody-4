@@ -50,6 +50,7 @@ describe(`App render suit`, () => {
     const store = mockStore({
       [NameSpace.GAME]: {
         step: -1,
+        mistakes: 0,
         maxMistakes: MAX_ERRORS,
       },
       [NameSpace.DATA]: {
