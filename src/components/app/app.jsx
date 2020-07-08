@@ -15,6 +15,7 @@ import GameOverScreen from '../game-over-screen/game-over-screen.jsx';
 import GameWinScreen from '../game-win-screen/game-win-screen.jsx';
 import {getStep, getMistakes, getMaxMistakes} from '../../reducer/game/selectors.js';
 import {getQuestions} from '../../reducer/data/selectors.js';
+import AuthorizationScreen from '../authorization-screen/authorization-screen.jsx';
 // import {getAuthorizationStatus} from '../../reducer/user/selectors.js';
 
 
@@ -82,6 +83,10 @@ class App extends PureComponent {
       <Switch>
         <Route exact path="/">
           {this._renderGameScreen()}
+        </Route>
+        <Route exact path="/dev-auth">
+          <AuthorizationScreen
+            onLoginSubmit={() => {}}/>
         </Route>
       </Switch>
     </BrowserRouter>;
