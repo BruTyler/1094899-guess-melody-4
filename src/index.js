@@ -7,8 +7,7 @@ import thunk from 'redux-thunk';
 import App from './components/app/app.jsx';
 import {AuthorizationStatus} from './const.js';
 import reducer from './reducer/reducer.js';
-import {Operation as DataOperation} from './reducer/data/data.js';
-import {ActionCreator, Operation as UserOperation} from './reducer/user/user.js';
+import {ActionCreator} from './reducer/user/user.js';
 import {createAPI} from './api.js';
 
 const onUnauthorized = () => {
@@ -24,9 +23,6 @@ const store = createStore(
         window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f
     )
 );
-
-store.dispatch(DataOperation.loadQuestions());
-store.dispatch(UserOperation.checkAuthorization());
 
 const init = () => {
   ReactDOM.render(

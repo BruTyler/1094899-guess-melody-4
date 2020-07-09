@@ -17,12 +17,25 @@ import {getStep, getMistakes, getMaxMistakes} from '../../reducer/game/selectors
 import {getQuestions} from '../../reducer/data/selectors.js';
 import AuthorizationScreen from '../authorization-screen/authorization-screen.jsx';
 import {getAuthorizationStatus} from '../../reducer/user/selectors.js';
-import {Operation as UserOperation} from "../../reducer/user/user.js";
+import {Operation as UserOperation} from '../../reducer/user/user.js';
+import {Operation as DataOperation} from '../../reducer/data/data.js';
 
 const QuestionGenreScreenWrapped = withActivePlayer(withUserAnswer(QuestionGenreScreen));
 const QuestionArtistScreenWrapped = withActivePlayer(QuestionArtistScreen);
 
 class App extends PureComponent {
+  constructor(props) {
+    super(props);
+
+    this._init();
+  }
+
+  _init() {
+    const {handleLoadQuestions, handleCheckAuthorization} = this.props;
+    handleLoadQuestions();
+    handleCheckAuthorization();
+  }
+
   _renderGameScreen() {
     const {
       errorCount,
@@ -116,6 +129,8 @@ App.propTypes = {
   step: PropTypes.number.isRequired,
   currentGameMistakes: PropTypes.number.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
+  handleLoadQuestions: PropTypes.func.isRequired,
+  handleCheckAuthorization: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -139,6 +154,12 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onLoginSubmit(authData) {
     dispatch(UserOperation.makeAuthorization(authData));
+  },
+  handleLoadQuestions() {
+    dispatch(DataOperation.loadQuestions());
+  },
+  handleCheckAuthorization() {
+    dispatch(UserOperation.checkAuthorization());
   },
 });
 
