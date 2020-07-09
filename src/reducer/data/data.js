@@ -15,7 +15,6 @@ const ActionCreator = {
       payload: questions,
     };
   },
-
 };
 
 const Operation = {
