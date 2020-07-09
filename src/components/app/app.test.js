@@ -2,13 +2,13 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
-import {App} from './app.jsx';
+import AppWithStore, {App} from './app.jsx';
+import NameSpace from '../../reducer/name-space.js';
 
-const mockStore = configureStore();
+const mockStore = configureStore([]);
 
 const EMPTY_HANDLER = () => {};
-const TIME = 100;
-const ERRORS = 3;
+const MAX_ERRORS = 3;
 const QUESTIONS = [
   {
     type: `genre`,
@@ -46,22 +46,24 @@ const QUESTIONS = [
 ];
 
 describe(`App render suit`, () => {
-  it(`App renders WelcomeScreen`, () => {
+  it(`App connected with Store renders WelcomeScreen`, () => {
     const store = mockStore({
-      mistakes: 0,
+      [NameSpace.GAME]: {
+        step: -1,
+        mistakes: 0,
+        maxMistakes: MAX_ERRORS,
+      },
+      [NameSpace.DATA]: {
+        questions: [],
+      },
     });
 
     const generatedTree = renderer.create(
         <Provider store={store}>
-          <App
-            gameTime={TIME}
-            errorCount={ERRORS}
-            questions={QUESTIONS}
+          <AppWithStore
             onUserAnswer={EMPTY_HANDLER}
             onWelcomeButtonClick={EMPTY_HANDLER}
-            step={-1}
             onResetGame={EMPTY_HANDLER}
-            currentGameMistakes={0}
           />
         </Provider>
     ).toJSON();
@@ -69,9 +71,27 @@ describe(`App render suit`, () => {
     expect(generatedTree).toMatchSnapshot();
   });
 
+  it(`App renders WelcomeScreen`, () => {
+    const generatedTree = renderer.create(
+        <App
+          errorCount={MAX_ERRORS}
+          questions={QUESTIONS}
+          onUserAnswer={EMPTY_HANDLER}
+          onWelcomeButtonClick={EMPTY_HANDLER}
+          step={-1}
+          onResetGame={EMPTY_HANDLER}
+          currentGameMistakes={0}
+        />
+    ).toJSON();
+
+    expect(generatedTree).toMatchSnapshot();
+  });
+
   it(`App renders GenreScreen`, () => {
     const store = mockStore({
-      mistakes: 3,
+      [NameSpace.GAME]: {
+        mistakes: MAX_ERRORS,
+      },
     });
 
     const questionIndex = QUESTIONS.findIndex((x) => x.type === `genre`);
@@ -80,8 +100,7 @@ describe(`App render suit`, () => {
     const generatedTree = renderer.create(
         <Provider store={store}>
           <App
-            gameTime={TIME}
-            errorCount={ERRORS}
+            errorCount={MAX_ERRORS}
             questions={QUESTIONS}
             onUserAnswer={EMPTY_HANDLER}
             onWelcomeButtonClick={EMPTY_HANDLER}
@@ -101,7 +120,9 @@ describe(`App render suit`, () => {
 
   it(`App renders ArtistScreen`, () => {
     const store = mockStore({
-      mistakes: 3,
+      [NameSpace.GAME]: {
+        mistakes: MAX_ERRORS,
+      },
     });
 
     const questionIndex = QUESTIONS.findIndex((x) => x.type === `artist`);
@@ -110,12 +131,13 @@ describe(`App render suit`, () => {
     const generatedTree = renderer.create(
         <Provider store={store}>
           <App
-            gameTime={TIME}
-            errorCount={ERRORS}
+            errorCount={MAX_ERRORS}
             questions={QUESTIONS}
             onUserAnswer={EMPTY_HANDLER}
             onWelcomeButtonClick={EMPTY_HANDLER}
             step={questionIndex}
+            onResetGame={EMPTY_HANDLER}
+            currentGameMistakes={0}
           />
         </Provider>
         , {

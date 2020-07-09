@@ -1,10 +1,10 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
-import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer.js";
+import {connect} from 'react-redux';
 
-import {GameType} from "../../const.js";
+import {ActionCreator} from '../../reducer/game/game.js';
+import {GameType} from '../../const.js';
 import GameScreen from './../game-screen/game-screen.jsx';
 import WelcomeScreen from './../welcome-screen/welcome-screen.jsx';
 import QuestionGenreScreen from '../question-genre-screen/question-genre-screen.jsx';
@@ -13,6 +13,10 @@ import withActivePlayer from '../../hocs/with-active-player/with-active-player.j
 import withUserAnswer from '../../hocs/with-user-answer/with-user-answer.jsx';
 import GameOverScreen from '../game-over-screen/game-over-screen.jsx';
 import GameWinScreen from '../game-win-screen/game-win-screen.jsx';
+import {getStep, getMistakes, getMaxMistakes} from '../../reducer/game/selectors.js';
+import {getQuestions} from '../../reducer/data/selectors.js';
+// import {getAuthorizationStatus} from '../../reducer/user/selectors.js';
+
 
 const QuestionGenreScreenWrapped = withActivePlayer(withUserAnswer(QuestionGenreScreen));
 const QuestionArtistScreenWrapped = withActivePlayer(QuestionArtistScreen);
@@ -20,7 +24,6 @@ const QuestionArtistScreenWrapped = withActivePlayer(QuestionArtistScreen);
 class App extends PureComponent {
   _renderGameScreen() {
     const {
-      gameTime,
       errorCount,
       questions,
       onUserAnswer,
@@ -33,7 +36,6 @@ class App extends PureComponent {
 
     if (step === -1) {
       return <WelcomeScreen
-        time={gameTime}
         error={errorCount}
         onWelcomeButtonClick={onWelcomeButtonClick}/>;
     } else if (currentGameMistakes >= errorCount) {
@@ -76,26 +78,10 @@ class App extends PureComponent {
   }
 
   render() {
-    const {questions} = this.props;
-
     return <BrowserRouter>
       <Switch>
         <Route exact path="/">
           {this._renderGameScreen()}
-        </Route>
-        <Route exact path="/dev-artist">
-          <GameScreen gameType={GameType.ARTIST}>
-            <QuestionArtistScreenWrapped
-              onAnswer={() => {}}
-              question={questions[1]}/>
-          </GameScreen>;
-        </Route>
-        <Route exact path="/dev-genre">
-          <GameScreen gameType={GameType.GENRE}>
-            <QuestionGenreScreenWrapped
-              onAnswer={() => {}}
-              question={questions[0]}/>
-          </GameScreen>;
         </Route>
       </Switch>
     </BrowserRouter>;
@@ -103,7 +89,6 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  gameTime: PropTypes.number.isRequired,
   errorCount: PropTypes.number.isRequired,
   questions: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   onUserAnswer: PropTypes.func.isRequired,
@@ -114,8 +99,10 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  step: state.step,
-  currentGameMistakes: state.mistakes
+  questions: getQuestions(state),
+  step: getStep(state),
+  errorCount: getMaxMistakes(state),
+  currentGameMistakes: getMistakes(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
