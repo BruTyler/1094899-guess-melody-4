@@ -2,10 +2,21 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
+import MockAdapter from 'axios-mock-adapter';
+
 import AppWithStore, {App} from './app.jsx';
 import NameSpace from '../../reducer/name-space.js';
+import {AuthorizationStatus} from '../../const.js';
+import {createAPI} from '../../api.js';
 
-const mockStore = configureStore([]);
+const api = createAPI(() => {});
+const apiMock = new MockAdapter(api);
+
+apiMock
+  .onAny()
+  .reply(200, []);
+const mockStore = configureStore([thunk.withExtraArgument(api)]);
 
 const EMPTY_HANDLER = () => {};
 const MAX_ERRORS = 3;
@@ -56,6 +67,9 @@ describe(`App render suit`, () => {
       [NameSpace.DATA]: {
         questions: [],
       },
+      [NameSpace.USER]: {
+        authorizationStatus: AuthorizationStatus.NO_AUTH,
+      },
     });
 
     const generatedTree = renderer.create(
@@ -64,6 +78,9 @@ describe(`App render suit`, () => {
             onUserAnswer={EMPTY_HANDLER}
             onWelcomeButtonClick={EMPTY_HANDLER}
             onResetGame={EMPTY_HANDLER}
+            onLoginSubmit={EMPTY_HANDLER}
+            handleLoadQuestions={EMPTY_HANDLER}
+            handleCheckAuthorization={EMPTY_HANDLER}
           />
         </Provider>
     ).toJSON();
@@ -80,7 +97,11 @@ describe(`App render suit`, () => {
           onWelcomeButtonClick={EMPTY_HANDLER}
           step={-1}
           onResetGame={EMPTY_HANDLER}
+          onLoginSubmit={EMPTY_HANDLER}
           currentGameMistakes={0}
+          authorizationStatus={AuthorizationStatus.NO_AUTH}
+          handleLoadQuestions={EMPTY_HANDLER}
+          handleCheckAuthorization={EMPTY_HANDLER}
         />
     ).toJSON();
 
@@ -106,7 +127,11 @@ describe(`App render suit`, () => {
             onWelcomeButtonClick={EMPTY_HANDLER}
             step={questionIndex}
             onResetGame={EMPTY_HANDLER}
+            onLoginSubmit={EMPTY_HANDLER}
             currentGameMistakes={0}
+            authorizationStatus={AuthorizationStatus.NO_AUTH}
+            handleLoadQuestions={EMPTY_HANDLER}
+            handleCheckAuthorization={EMPTY_HANDLER}
           />
         </Provider>, {
           createNodeMock: () => {
@@ -138,6 +163,10 @@ describe(`App render suit`, () => {
             step={questionIndex}
             onResetGame={EMPTY_HANDLER}
             currentGameMistakes={0}
+            onLoginSubmit={EMPTY_HANDLER}
+            authorizationStatus={AuthorizationStatus.NO_AUTH}
+            handleLoadQuestions={EMPTY_HANDLER}
+            handleCheckAuthorization={EMPTY_HANDLER}
           />
         </Provider>
         , {

@@ -2,7 +2,6 @@ import {createSelector} from 'reselect';
 import NameSpace from '../name-space.js';
 import {GameType} from '../../const.js';
 
-
 const NAME_SPACE = NameSpace.DATA;
 
 export const getQuestions = (state) => {

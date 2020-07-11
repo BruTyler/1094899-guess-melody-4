@@ -33,7 +33,6 @@ const reducer = (state = initialState, action) => {
         questions: action.payload,
       });
   }
-
   return state;
 };
 
