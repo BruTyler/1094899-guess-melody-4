@@ -18,9 +18,9 @@ const isArtistCorrect = (question, userAnswer) => {
 };
 
 const isGenreCorrect = (question, userAnswer) => {
-  const correctAnswers = question.answers.map((x) => x.genre === question.genre);
-  return userAnswer.reduce((accumulatedResult, currentAnswer, index) =>
-    accumulatedResult && currentAnswer === correctAnswers[index]);
+  return userAnswer.every((it, i) => {
+    return it === (question.answers[i].genre === question.genre);
+  });
 };
 
 const ActionCreator = {

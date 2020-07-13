@@ -5,11 +5,15 @@ import {createStore, applyMiddleware, compose} from 'redux';
 import thunk from 'redux-thunk';
 
 import App from './components/app/app.jsx';
+import {AuthorizationStatus} from './const.js';
 import reducer from './reducer/reducer.js';
-import {Operation as DataOperation} from './reducer/data/data.js';
+import {ActionCreator} from './reducer/user/user.js';
 import {createAPI} from './api.js';
 
-const onUnauthorized = () => {};
+const onUnauthorized = () => {
+  store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH));
+};
+
 const api = createAPI(onUnauthorized);
 
 const store = createStore(
@@ -19,8 +23,6 @@ const store = createStore(
         window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f
     )
 );
-
-store.dispatch(DataOperation.loadQuestions());
 
 const init = () => {
   ReactDOM.render(

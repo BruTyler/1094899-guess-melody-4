@@ -15,7 +15,6 @@ const ActionCreator = {
       payload: questions,
     };
   },
-
 };
 
 const Operation = {
@@ -34,9 +33,7 @@ const reducer = (state = initialState, action) => {
         questions: action.payload,
       });
   }
-
   return state;
 };
-
 
 export {reducer, ActionType, ActionCreator, Operation};
