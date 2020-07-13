@@ -1,5 +1,5 @@
 import {reducer, ActionType, ActionCreator} from './game.js';
-import {GameType} from '../../const.js';
+import {GameType, WelcomeScreenBehaviour} from '../../const.js';
 
 const QUESTIONS = [
   {
@@ -126,14 +126,27 @@ describe(`Game reducer unit-tests`, () => {
     });
   });
 
-  it(`Game reducer should reset the game using action`, () => {
+  it(`Game reducer should reset the game and skip WelcomeScreen using action`, () => {
     expect(reducer({
       step: 3,
       mistakes: 3,
       maxMistakes: 3,
-    }, ActionCreator.resetGame())
+    }, ActionCreator.resetGame(WelcomeScreenBehaviour.HIDE))
     ).toEqual({
       step: 0,
+      mistakes: 0,
+      maxMistakes: 3,
+    });
+  });
+
+  it(`Game reducer should reset the game and show WelcomeScreen using action`, () => {
+    expect(reducer({
+      step: 3,
+      mistakes: 3,
+      maxMistakes: 3,
+    }, ActionCreator.resetGame(WelcomeScreenBehaviour.SHOW))
+    ).toEqual({
+      step: -1,
       mistakes: 0,
       maxMistakes: 3,
     });
@@ -146,6 +159,7 @@ describe(`Game reducer unit-tests`, () => {
       maxMistakes: 3,
     }, {
       type: ActionType.RESET_GAME,
+      payload: 0,
     })
     ).toEqual({
       step: 0,

@@ -63,7 +63,8 @@ exports[`App render suit App renders ArtistScreen 1`] = `
   >
     <a
       className="game__back"
-      href="#"
+      href="/"
+      onClick={[Function]}
     >
       <span
         className="visually-hidden"
@@ -222,7 +223,8 @@ exports[`App render suit App renders GenreScreen 1`] = `
   >
     <a
       className="game__back"
-      href="#"
+      href="/"
+      onClick={[Function]}
     >
       <span
         className="visually-hidden"

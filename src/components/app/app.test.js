@@ -7,7 +7,7 @@ import MockAdapter from 'axios-mock-adapter';
 
 import AppWithStore, {App} from './app.jsx';
 import NameSpace from '../../reducer/name-space.js';
-import {AuthorizationStatus} from '../../const.js';
+import {AuthorizationStatus, GameType} from '../../const.js';
 import {createAPI} from '../../api.js';
 
 const api = createAPI(() => {});
@@ -115,7 +115,7 @@ describe(`App render suit`, () => {
       },
     });
 
-    const questionIndex = QUESTIONS.findIndex((x) => x.type === `genre`);
+    const questionIndex = QUESTIONS.findIndex((x) => x.type === GameType.GENRE);
     expect(questionIndex).not.toBe(-1);
 
     const generatedTree = renderer.create(
@@ -150,7 +150,7 @@ describe(`App render suit`, () => {
       },
     });
 
-    const questionIndex = QUESTIONS.findIndex((x) => x.type === `artist`);
+    const questionIndex = QUESTIONS.findIndex((x) => x.type === GameType.ARTIST);
     expect(questionIndex).not.toBe(-1);
 
     const generatedTree = renderer.create(

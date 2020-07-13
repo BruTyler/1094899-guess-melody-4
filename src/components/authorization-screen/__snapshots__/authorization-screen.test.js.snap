@@ -75,12 +75,13 @@ exports[`<AuthorizationScreen /> render suit <AuthorizationScreen /> render case
       Войти
     </button>
   </form>
-  <button
+  <a
     className="replay"
+    href="/"
     onClick={[Function]}
     type="button"
   >
     Сыграть ещё раз
-  </button>
+  </a>
 </section>
 `;
