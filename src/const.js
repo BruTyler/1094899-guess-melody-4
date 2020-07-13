@@ -14,3 +14,8 @@ export const AppRoute = {
   GAME_OVER: `/lose`,
   GAME_WIN: `/result`
 };
+
+export const WelcomeScreenBehaviour = {
+  SHOW: `SHOW`,
+  HIDE: `HIDE`,
+};

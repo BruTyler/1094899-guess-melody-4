@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 
-import {GameType, AuthorizationStatus, AppRoute} from '../../const.js';
+import {GameType, AuthorizationStatus, AppRoute, WelcomeScreenBehaviour} from '../../const.js';
 import PrivateRoute from '../private-route/private-route.jsx';
 import GameScreen from './../game-screen/game-screen.jsx';
 import WelcomeScreen from './../welcome-screen/welcome-screen.jsx';
@@ -160,7 +160,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreator.incrementStep());
   },
   onResetGame() {
-    dispatch(ActionCreator.resetGame());
+    dispatch(ActionCreator.resetGame(WelcomeScreenBehaviour.HIDE));
   },
   onLoginSubmit(authData) {
     dispatch(UserOperation.makeAuthorization(authData));
