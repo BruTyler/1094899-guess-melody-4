@@ -1,8 +1,9 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {Router, Route, Switch} from 'react-router-dom';
 import {connect} from 'react-redux';
 
+import historyInstance from '../../history.js';
 import {GameType, AuthorizationStatus} from '../../const.js';
 import GameScreen from './../game-screen/game-screen.jsx';
 import WelcomeScreen from './../welcome-screen/welcome-screen.jsx';
@@ -103,7 +104,7 @@ class App extends PureComponent {
   }
 
   render() {
-    return <BrowserRouter>
+    return <Router history={historyInstance}>
       <Switch>
         <Route exact path="/">
           {this._renderGameScreen()}
@@ -115,7 +116,7 @@ class App extends PureComponent {
           />
         </Route>
       </Switch>
-    </BrowserRouter>;
+    </Router>;
   }
 }
 
