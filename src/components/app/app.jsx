@@ -1,9 +1,10 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 
-import {GameType, AuthorizationStatus} from '../../const.js';
+import {GameType, AuthorizationStatus, AppRoute, WelcomeScreenBehaviour} from '../../const.js';
+import PrivateRoute from '../private-route/private-route.jsx';
 import GameScreen from './../game-screen/game-screen.jsx';
 import WelcomeScreen from './../welcome-screen/welcome-screen.jsx';
 import QuestionGenreScreen from '../question-genre-screen/question-genre-screen.jsx';
@@ -44,9 +45,7 @@ class App extends PureComponent {
       onWelcomeButtonClick,
       step,
       currentGameMistakes,
-      onResetGame,
       authorizationStatus,
-      onLoginSubmit,
     } = this.props;
     const question = questions[step];
 
@@ -55,24 +54,13 @@ class App extends PureComponent {
         error={errorCount}
         onWelcomeButtonClick={onWelcomeButtonClick}/>;
     } else if (currentGameMistakes >= errorCount) {
-      return <GameOverScreen
-        onReplayButtonClick={onResetGame}/>;
+      return <Redirect to={AppRoute.GAME_OVER} />;
     } else if (step >= questions.length) {
-
       if (authorizationStatus === AuthorizationStatus.NO_AUTH) {
-        return <AuthorizationScreen
-          onLoginSubmit={onLoginSubmit}
-          onReplayButtonClick={onResetGame}
-        />;
+        return <Redirect to={AppRoute.AUTH} />;
       } else if (authorizationStatus === AuthorizationStatus.AUTH) {
-        const correctAnswersCount = step - currentGameMistakes;
-        return <GameWinScreen
-          onReplayButtonClick={onResetGame}
-          mistakesCount={currentGameMistakes}
-          answeredQuestionsCount={correctAnswersCount}
-        />;
+        return <Redirect to={AppRoute.GAME_WIN} />;
       }
-
     }
 
     if (question) {
@@ -103,17 +91,39 @@ class App extends PureComponent {
   }
 
   render() {
+    const {
+      step,
+      currentGameMistakes,
+      onResetGame,
+      onLoginSubmit,
+    } = this.props;
+
     return <BrowserRouter>
       <Switch>
-        <Route exact path="/">
-          {this._renderGameScreen()}
+        <Route exact path={AppRoute.ROOT}>
+          {this._renderGameScreen(history)}
         </Route>
-        <Route exact path="/dev-auth">
+        <Route exact path={AppRoute.AUTH}>
           <AuthorizationScreen
-            onLoginSubmit={() => {}}
-            onReplayButtonClick={() => {}}
+            onLoginSubmit={onLoginSubmit}
+            onReplayButtonClick={onResetGame}
           />
         </Route>
+        <Route exact path={AppRoute.GAME_OVER}>
+          <GameOverScreen
+            onReplayButtonClick={onResetGame}
+          />
+        </Route>
+        <PrivateRoute exact path={AppRoute.GAME_WIN}
+          render={() => {
+            return <GameWinScreen
+              onReplayButtonClick={onResetGame}
+              mistakesCount={currentGameMistakes}
+              answeredQuestionsCount={step}
+            />;
+          }}
+        />
+        <Route render={() => `Ooops`} />
       </Switch>
     </BrowserRouter>;
   }
@@ -150,7 +160,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreator.incrementStep());
   },
   onResetGame() {
-    dispatch(ActionCreator.resetGame());
+    dispatch(ActionCreator.resetGame(WelcomeScreenBehaviour.HIDE));
   },
   onLoginSubmit(authData) {
     dispatch(UserOperation.makeAuthorization(authData));

@@ -1,5 +1,7 @@
 import React, {PureComponent, createRef} from 'react';
 import PropTypes from 'prop-types';
+import {AppRoute} from '../../const';
+import {Link} from 'react-router-dom';
 
 class AuthorizationScreen extends PureComponent {
   constructor(props) {
@@ -42,7 +44,14 @@ class AuthorizationScreen extends PureComponent {
         </p>
         <button className="login__button button" type="submit">Войти</button>
       </form>
-      <button className="replay" type="button" onClick={onReplayButtonClick}>Сыграть ещё раз</button>
+      <Link
+        className="replay"
+        type="button"
+        to={AppRoute.ROOT}
+        onClick={onReplayButtonClick}
+      >
+        Сыграть ещё раз
+      </Link>
     </section>;
   }
 }
