@@ -1,5 +1,5 @@
 import {extend} from '../../utils.js';
-import {GameType} from '../../const.js';
+import {GameType, WelcomeScreenBehaviour} from '../../const.js';
 
 const initialState = {
   mistakes: 0,
@@ -49,9 +49,10 @@ const ActionCreator = {
     };
   },
 
-  resetGame: () => {
+  resetGame: (skipWelcome) => {
     return {
       type: ActionType.RESET_GAME,
+      payload: skipWelcome === WelcomeScreenBehaviour.HIDE ? 0 : -1,
     };
   },
 };
@@ -70,7 +71,7 @@ const reducer = (state = initialState, action) => {
 
     case ActionType.RESET_GAME:
       return extend(initialState, {
-        step: 0,
+        step: action.payload,
       });
   }
 
