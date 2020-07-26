@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 
-import Mistakes from '../mistakes/mistakes.jsx';
+import Mistakes from '../mistakes/mistakes.js';
 import {GameType, AppRoute, WelcomeScreenBehaviour} from '../../const.js';
 import {getMistakes} from '../../reducer/game/selectors.js';
 import {ActionCreator} from '../../reducer/game/game.js';

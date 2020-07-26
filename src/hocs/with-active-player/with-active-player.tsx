@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react';
 import Player from '../../components/audio-player/audio-player.jsx';
-import withAudio from '../with-audio/with-audio.jsx';
+import withAudio from '../with-audio/with-audio.js';
 
 const AudioPlayer = withAudio(Player);
 
