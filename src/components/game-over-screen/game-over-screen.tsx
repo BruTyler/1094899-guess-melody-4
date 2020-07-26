@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const';
 
 interface Props {
-  onReplayButtonClick: () => void,
+  onReplayButtonClick: () => void;
 }
 
 const GameOverScreen: React.FunctionComponent<Props> = ({onReplayButtonClick}: Props) => (

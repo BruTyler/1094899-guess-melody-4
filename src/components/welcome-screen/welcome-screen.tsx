@@ -1,11 +1,11 @@
 import * as React from 'react';
 
 interface Props {
-  error: number,
-  onWelcomeButtonClick: () => void,
+  error: number;
+  onWelcomeButtonClick: () => void;
 }
 
-const WelcomeScreen: React.FunctionComponent<Props> = (props) => {
+const WelcomeScreen: React.FunctionComponent<Props> = (props: Props) => {
   const {error, onWelcomeButtonClick} = props;
 
   return <section className="welcome">

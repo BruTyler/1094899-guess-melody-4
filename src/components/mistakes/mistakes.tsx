@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 interface Props {
-  count: number,
+  count: number;
 }
 
 const Mistakes: React.FunctionComponent<Props> = ({count}: Props) => {

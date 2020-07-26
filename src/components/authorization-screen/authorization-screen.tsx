@@ -12,7 +12,7 @@ class AuthorizationScreen extends React.PureComponent<Props> {
   private loginRef: React.RefObject<HTMLInputElement>;
   private passwordRef: React.RefObject<HTMLInputElement>;
 
-  constructor(props : Readonly<Props>) {
+  constructor(props: Readonly<Props>) {
     super(props);
 
     this.loginRef = React.createRef();

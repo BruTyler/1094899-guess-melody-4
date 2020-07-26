@@ -13,9 +13,9 @@ interface State {
 }
 
 const withAudio = (Component) => {
-  class WithAudio extends React.PureComponent<Props, State>  {
+  class WithAudio extends React.PureComponent<Props, State> {
     private _audioRef: React.RefObject<HTMLAudioElement>;
-    
+
     constructor(props: Props) {
       super(props);
 

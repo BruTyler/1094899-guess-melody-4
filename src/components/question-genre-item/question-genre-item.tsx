@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { RenderPlayerFunc } from '../../types';
+import {RenderPlayerFunc} from '../../types';
 
 interface Props {
-  renderPlayer: RenderPlayerFunc,
-  onAnswerChange: (index: number, value: boolean) => void,
-  isChecked: boolean,
-  index: number,
-  answerSrc: string,
+  renderPlayer: RenderPlayerFunc;
+  onAnswerChange: (index: number, value: boolean) => void;
+  isChecked: boolean;
+  index: number;
+  answerSrc: string;
 }
 
 const QuestionGenreItem: React.FunctionComponent<Props> = (props: Props) => {

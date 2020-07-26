@@ -3,11 +3,11 @@ import QuestionGenreItem from '../question-genre-item/question-genre-item';
 import {QuestionGenre, RenderPlayerFunc} from '../../types';
 
 interface Props {
-  renderPlayer: RenderPlayerFunc,
-  onAnswerChange: (index: number, value: boolean) => void,
-  onAnswer: () => void,
-  userAnswers: boolean[],
-  question: QuestionGenre,
+  renderPlayer: RenderPlayerFunc;
+  onAnswerChange: (index: number, value: boolean) => void;
+  onAnswer: () => void;
+  userAnswers: boolean[];
+  question: QuestionGenre;
 }
 
 const QuestionGenreScreen: React.FunctionComponent<Props> = (props: Props) => {

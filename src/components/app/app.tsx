@@ -23,17 +23,17 @@ import {Operation as DataOperation} from '../../reducer/data/data';
 import {Question} from '../../types';
 
 interface Props {
-  errorCount: number,
-  questions: Question[],
+  errorCount: number;
+  questions: Question[];
   onUserAnswer: () => void;
   onWelcomeButtonClick: () => void;
   onLoginSubmit: () => void;
   onResetGame: () => void;
-  step: number,
-  currentGameMistakes: number,
-  authorizationStatus: string,
-  handleLoadQuestions: () => void,
-  handleCheckAuthorization: () => void,
+  step: number;
+  currentGameMistakes: number;
+  authorizationStatus: string;
+  handleLoadQuestions: () => void;
+  handleCheckAuthorization: () => void;
 }
 
 const QuestionGenreScreenWrapped = withActivePlayer(withUserAnswer(QuestionGenreScreen));

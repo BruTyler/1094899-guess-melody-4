@@ -8,7 +8,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-const AudioPlayer : React.FunctionComponent<Props> = (props: Readonly<Props>) => {
+const AudioPlayer: React.FunctionComponent<Props> = (props: Readonly<Props>) => {
   const {isLoading, isPlaying, onPlayButtonClick, children} = props;
 
   return (

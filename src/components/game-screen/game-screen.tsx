@@ -9,7 +9,7 @@ import {getMistakes} from '../../reducer/game/selectors';
 import {ActionCreator} from '../../reducer/game/game';
 
 interface Props {
-  gameType: GameType,
+  gameType: GameType;
   children: React.ReactNode;
   goToWelcome: () => void;
   mistakes: number;
