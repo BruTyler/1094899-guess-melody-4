@@ -1,5 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware, compose} from 'redux';
 import thunk from 'redux-thunk';
@@ -15,6 +15,12 @@ const onUnauthorized = () => {
 };
 
 const api = createAPI(onUnauthorized);
+
+declare global {
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION__?: () => null;
+  }
+}
 
 const store = createStore(
     reducer,
