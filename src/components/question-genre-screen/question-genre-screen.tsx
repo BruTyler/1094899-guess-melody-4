@@ -1,9 +1,16 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import {GameType} from '../../const.js';
-import QuestionGenreItem from '../question-genre-item/question-genre-item.jsx';
+import * as React from 'react';
+import QuestionGenreItem from '../question-genre-item/question-genre-item';
+import {QuestionGenre, RenderPlayerFunc} from '../../types';
 
-const QuestionGenreScreen = (props) => {
+interface Props {
+  renderPlayer: RenderPlayerFunc,
+  onAnswerChange: (index: number, value: boolean) => void,
+  onAnswer: () => void,
+  userAnswers: boolean[],
+  question: QuestionGenre,
+}
+
+const QuestionGenreScreen: React.FunctionComponent<Props> = (props: Props) => {
   const {onAnswer, question, renderPlayer, onAnswerChange, userAnswers} = props;
   const {genre, answers} = question;
 
@@ -29,23 +36,6 @@ const QuestionGenreScreen = (props) => {
       <button className="game__submit button" type="submit">Ответить</button>
     </form>
   </section>;
-};
-
-QuestionGenreScreen.propTypes = {
-  onAnswer: PropTypes.func.isRequired,
-  renderPlayer: PropTypes.func.isRequired,
-  onAnswerChange: PropTypes.func.isRequired,
-  userAnswers: PropTypes.arrayOf(PropTypes.bool.isRequired).isRequired,
-  question: PropTypes.shape({
-    type: PropTypes.oneOf([GameType.GENRE]).isRequired,
-    genre: PropTypes.string.isRequired,
-    answers: PropTypes.arrayOf(
-        PropTypes.shape({
-          genre: PropTypes.string.isRequired,
-          src: PropTypes.string.isRequired,
-        })
-    ).isRequired
-  }).isRequired,
 };
 
 export default QuestionGenreScreen;

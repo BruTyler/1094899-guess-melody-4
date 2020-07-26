@@ -1,6 +1,6 @@
 import React from 'react';
 import {mount} from 'enzyme';
-import QuestionGenreScreen from './question-genre-screen.jsx';
+import QuestionGenreScreen from './question-genre-screen';
 
 const EMPTY_HANDLER = () => {};
 const USER_ANSWERS = [false, false, false, false];

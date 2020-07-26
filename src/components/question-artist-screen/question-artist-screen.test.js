@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import QuestionArtistScreen from './question-artist-screen.jsx';
+import QuestionArtistScreen from './question-artist-screen';
 
 const EMPTY_HANDLER = () => {};
 const QUESTION = {

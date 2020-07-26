@@ -1,31 +1,46 @@
-import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
+import {Dispatch} from 'redux';
 
-import {GameType, AuthorizationStatus, AppRoute, WelcomeScreenBehaviour} from '../../const.js';
-import PrivateRoute from '../private-route/private-route.jsx';
-import GameScreen from './../game-screen/game-screen.jsx';
-import WelcomeScreen from './../welcome-screen/welcome-screen.jsx';
-import QuestionGenreScreen from '../question-genre-screen/question-genre-screen.jsx';
-import QuestionArtistScreen from '../question-artist-screen/question-artist-screen.jsx';
-import withActivePlayer from '../../hocs/with-active-player/with-active-player.jsx';
-import withUserAnswer from '../../hocs/with-user-answer/with-user-answer.jsx';
-import GameOverScreen from '../game-over-screen/game-over-screen.jsx';
-import GameWinScreen from '../game-win-screen/game-win-screen.jsx';
-import {ActionCreator} from '../../reducer/game/game.js';
-import {getStep, getMistakes, getMaxMistakes} from '../../reducer/game/selectors.js';
-import {getQuestions} from '../../reducer/data/selectors.js';
-import AuthorizationScreen from '../authorization-screen/authorization-screen.jsx';
-import {getAuthorizationStatus} from '../../reducer/user/selectors.js';
-import {Operation as UserOperation} from '../../reducer/user/user.js';
-import {Operation as DataOperation} from '../../reducer/data/data.js';
+import {GameType, AuthorizationStatus, AppRoute, WelcomeScreenBehaviour} from '../../const';
+import PrivateRoute from '../private-route/private-route';
+import GameScreen from './../game-screen/game-screen';
+import WelcomeScreen from './../welcome-screen/welcome-screen';
+import QuestionGenreScreen from '../question-genre-screen/question-genre-screen';
+import QuestionArtistScreen from '../question-artist-screen/question-artist-screen';
+import withActivePlayer from '../../hocs/with-active-player/with-active-player';
+import withUserAnswer from '../../hocs/with-user-answer/with-user-answer';
+import GameOverScreen from '../game-over-screen/game-over-screen';
+import GameWinScreen from '../game-win-screen/game-win-screen';
+import {ActionCreator} from '../../reducer/game/game';
+import {getStep, getMistakes, getMaxMistakes} from '../../reducer/game/selectors';
+import {getQuestions} from '../../reducer/data/selectors';
+import AuthorizationScreen from '../authorization-screen/authorization-screen';
+import {getAuthorizationStatus} from '../../reducer/user/selectors';
+import {Operation as UserOperation} from '../../reducer/user/user';
+import {Operation as DataOperation} from '../../reducer/data/data';
+import {Question} from '../../types';
+
+interface Props {
+  errorCount: number,
+  questions: Question[],
+  onUserAnswer: () => void;
+  onWelcomeButtonClick: () => void;
+  onLoginSubmit: () => void;
+  onResetGame: () => void;
+  step: number,
+  currentGameMistakes: number,
+  authorizationStatus: string,
+  handleLoadQuestions: () => void,
+  handleCheckAuthorization: () => void,
+}
 
 const QuestionGenreScreenWrapped = withActivePlayer(withUserAnswer(QuestionGenreScreen));
 const QuestionArtistScreenWrapped = withActivePlayer(QuestionArtistScreen);
 
-class App extends PureComponent {
-  constructor(props) {
+class App extends React.PureComponent<Props> {
+  constructor(props: Readonly<Props>) {
     super(props);
 
     this._init();
@@ -101,7 +116,7 @@ class App extends PureComponent {
     return <BrowserRouter>
       <Switch>
         <Route exact path={AppRoute.ROOT}>
-          {this._renderGameScreen(history)}
+          {this._renderGameScreen()}
         </Route>
         <Route exact path={AppRoute.AUTH}>
           <AuthorizationScreen
@@ -129,20 +144,6 @@ class App extends PureComponent {
   }
 }
 
-App.propTypes = {
-  errorCount: PropTypes.number.isRequired,
-  questions: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  onUserAnswer: PropTypes.func.isRequired,
-  onWelcomeButtonClick: PropTypes.func.isRequired,
-  onLoginSubmit: PropTypes.func.isRequired,
-  onResetGame: PropTypes.func.isRequired,
-  step: PropTypes.number.isRequired,
-  currentGameMistakes: PropTypes.number.isRequired,
-  authorizationStatus: PropTypes.string.isRequired,
-  handleLoadQuestions: PropTypes.func.isRequired,
-  handleCheckAuthorization: PropTypes.func.isRequired,
-};
-
 const mapStateToProps = (state) => ({
   authorizationStatus: getAuthorizationStatus(state),
   questions: getQuestions(state),
@@ -151,7 +152,7 @@ const mapStateToProps = (state) => ({
   currentGameMistakes: getMistakes(state),
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch: Dispatch) => ({
   onWelcomeButtonClick() {
     dispatch(ActionCreator.incrementStep());
   },
@@ -173,5 +174,5 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export {App};
+export {App as RawComponent};
 export default connect(mapStateToProps, mapDispatchToProps)(App);

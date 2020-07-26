@@ -1,6 +1,6 @@
 import React from 'react';
 import {shallow} from 'enzyme';
-import QuestionArtistScreen from './question-artist-screen.jsx';
+import QuestionArtistScreen from './question-artist-screen';
 
 const EMPTY_HANDLER = () => {};
 const QUESTION = {

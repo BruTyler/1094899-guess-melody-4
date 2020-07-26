@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Mistakes from './mistakes.jsx';
+import Mistakes from './mistakes';
 
 describe(`Mistakes render suit`, () => {
   it(`Mistakes render case`, () => {

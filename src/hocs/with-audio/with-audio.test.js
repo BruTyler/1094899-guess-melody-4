@@ -1,9 +1,9 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import PropTypes from 'prop-types';
-import withAudio from './with-audio.jsx';
+import withAudio from './with-audio';
 
 const MockComponent = (props) => {
+  // eslint-disable-next-line react/prop-types
   const {children} = props;
 
   return (
@@ -13,12 +13,12 @@ const MockComponent = (props) => {
   );
 };
 
-MockComponent.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
-  ]).isRequired,
-};
+// MockComponent.propTypes = {
+//   children: PropTypes.oneOfType([
+//     PropTypes.arrayOf(PropTypes.node),
+//     PropTypes.node
+//   ]).isRequired,
+// };
 
 const MockComponentWrapped = withAudio(MockComponent);
 

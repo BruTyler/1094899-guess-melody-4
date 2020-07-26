@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import GameWinScreen from './game-win-screen.jsx';
+import GameWinScreen from './game-win-screen';
 import {BrowserRouter} from 'react-router-dom';
 
 describe(`<GameWinScreen /> render suit`, () => {

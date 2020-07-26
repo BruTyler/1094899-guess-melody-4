@@ -1,14 +1,22 @@
-import React, {PureComponent, createRef} from 'react';
-import PropTypes from 'prop-types';
-import {AppRoute} from '../../const';
+import * as React from 'react';
 import {Link} from 'react-router-dom';
+import {AppRoute} from '../../const';
+import {AuthData} from '../../types';
 
-class AuthorizationScreen extends PureComponent {
-  constructor(props) {
+interface Props {
+  onLoginSubmit: ({}: AuthData) => void;
+  onReplayButtonClick: () => void;
+}
+
+class AuthorizationScreen extends React.PureComponent<Props> {
+  private loginRef: React.RefObject<HTMLInputElement>;
+  private passwordRef: React.RefObject<HTMLInputElement>;
+
+  constructor(props : Readonly<Props>) {
     super(props);
 
-    this.loginRef = createRef();
-    this.passwordRef = createRef();
+    this.loginRef = React.createRef();
+    this.passwordRef = React.createRef();
 
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -17,8 +25,8 @@ class AuthorizationScreen extends PureComponent {
     const {onLoginSubmit} = this.props;
     evt.preventDefault();
     const login = this.loginRef.current.value;
-    const pwd = this.passwordRef.current.value;
-    onLoginSubmit({login, pwd});
+    const password = this.passwordRef.current.value;
+    onLoginSubmit({login, password});
   }
 
   render() {
@@ -55,10 +63,5 @@ class AuthorizationScreen extends PureComponent {
     </section>;
   }
 }
-
-AuthorizationScreen.propTypes = {
-  onLoginSubmit: PropTypes.func.isRequired,
-  onReplayButtonClick: PropTypes.func.isRequired,
-};
 
 export default AuthorizationScreen;

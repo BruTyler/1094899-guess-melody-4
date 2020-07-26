@@ -1,9 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const';
 
-const GameOverScreen = ({onReplayButtonClick}) => (
+interface Props {
+  onReplayButtonClick: () => void,
+}
+
+const GameOverScreen: React.FunctionComponent<Props> = ({onReplayButtonClick}: Props) => (
   <section className="result">
     <div className="result__logo"><img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83" /></div>
     <h2 className="result__title">Какая жалость!</h2>
@@ -18,9 +21,5 @@ const GameOverScreen = ({onReplayButtonClick}) => (
     </Link>
   </section>
 );
-
-GameOverScreen.propTypes = {
-  onReplayButtonClick: PropTypes.func.isRequired,
-};
 
 export default GameOverScreen;

@@ -1,7 +1,15 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
+import { RenderPlayerFunc } from '../../types';
 
-const QuestionGenreItem = (props) => {
+interface Props {
+  renderPlayer: RenderPlayerFunc,
+  onAnswerChange: (index: number, value: boolean) => void,
+  isChecked: boolean,
+  index: number,
+  answerSrc: string,
+}
+
+const QuestionGenreItem: React.FunctionComponent<Props> = (props: Props) => {
   const {index, isChecked, answerSrc, renderPlayer, onAnswerChange} = props;
 
   return <div className="track">
@@ -17,14 +25,6 @@ const QuestionGenreItem = (props) => {
       <label className="game__check" htmlFor={`answer-${index}`}>Отметить</label>
     </div>
   </div>;
-};
-
-QuestionGenreItem.propTypes = {
-  renderPlayer: PropTypes.func.isRequired,
-  onAnswerChange: PropTypes.func.isRequired,
-  isChecked: PropTypes.bool.isRequired,
-  index: PropTypes.number.isRequired,
-  answerSrc: PropTypes.string.isRequired,
 };
 
 export default QuestionGenreItem;

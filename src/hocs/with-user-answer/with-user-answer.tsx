@@ -1,8 +1,17 @@
-import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
+import {QuestionGenre, UserAnswers} from '../../types';
+
+interface Props {
+  question: QuestionGenre;
+  onAnswer: (question: QuestionGenre, userAnswers: UserAnswers) => void;
+}
+
+interface State {
+  userAnswers: UserAnswers;
+}
 
 const withUserAnswer = (Component) => {
-  class WithUserAnswer extends PureComponent {
+  class WithUserAnswer extends React.PureComponent<Props, State> {
     constructor(props) {
       super(props);
 
@@ -39,11 +48,6 @@ const withUserAnswer = (Component) => {
       />;
     }
   }
-
-  WithUserAnswer.propTypes = {
-    onAnswer: PropTypes.func.isRequired,
-    question: PropTypes.shape().isRequired,
-  };
 
   return WithUserAnswer;
 };

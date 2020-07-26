@@ -1,7 +1,14 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 
-const AudioPlayer = (props) => {
+interface Props {
+  src: string;
+  isPlaying: boolean;
+  onPlayButtonClick: () => void;
+  isLoading: boolean;
+  children: React.ReactNode;
+}
+
+const AudioPlayer : React.FunctionComponent<Props> = (props: Readonly<Props>) => {
   const {isLoading, isPlaying, onPlayButtonClick, children} = props;
 
   return (
@@ -17,17 +24,6 @@ const AudioPlayer = (props) => {
       </div>
     </React.Fragment>
   );
-};
-
-AudioPlayer.propTypes = {
-  src: PropTypes.string.isRequired,
-  isPlaying: PropTypes.bool.isRequired,
-  onPlayButtonClick: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool.isRequired,
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
-  ]).isRequired,
 };
 
 export default AudioPlayer;

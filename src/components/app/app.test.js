@@ -1,14 +1,14 @@
-import React from 'react';
+import * as React from 'react';
 import renderer from 'react-test-renderer';
 import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import MockAdapter from 'axios-mock-adapter';
 
-import AppWithStore, {App} from './app.jsx';
-import NameSpace from '../../reducer/name-space.js';
-import {AuthorizationStatus, GameType} from '../../const.js';
-import {createAPI} from '../../api.js';
+import * as App from './app';
+import NameSpace from '../../reducer/name-space';
+import {AuthorizationStatus, GameType} from '../../const';
+import {createAPI} from '../../api';
 
 const api = createAPI(() => {});
 const apiMock = new MockAdapter(api);
@@ -74,7 +74,7 @@ describe(`App render suit`, () => {
 
     const generatedTree = renderer.create(
         <Provider store={store}>
-          <AppWithStore
+          <App
             onUserAnswer={EMPTY_HANDLER}
             onWelcomeButtonClick={EMPTY_HANDLER}
             onResetGame={EMPTY_HANDLER}
@@ -90,7 +90,7 @@ describe(`App render suit`, () => {
 
   it(`App renders WelcomeScreen`, () => {
     const generatedTree = renderer.create(
-        <App
+        <App.RawComponent
           errorCount={MAX_ERRORS}
           questions={QUESTIONS}
           onUserAnswer={EMPTY_HANDLER}
@@ -120,7 +120,7 @@ describe(`App render suit`, () => {
 
     const generatedTree = renderer.create(
         <Provider store={store}>
-          <App
+          <App.RawComponent
             errorCount={MAX_ERRORS}
             questions={QUESTIONS}
             onUserAnswer={EMPTY_HANDLER}
@@ -155,7 +155,7 @@ describe(`App render suit`, () => {
 
     const generatedTree = renderer.create(
         <Provider store={store}>
-          <App
+          <App.RawComponent
             errorCount={MAX_ERRORS}
             questions={QUESTIONS}
             onUserAnswer={EMPTY_HANDLER}

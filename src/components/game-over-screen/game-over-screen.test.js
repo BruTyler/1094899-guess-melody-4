@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import GameOverScreen from './game-over-screen.jsx';
+import GameOverScreen from './game-over-screen';
 import {BrowserRouter} from 'react-router-dom';
 
 describe(`<GameOverScreen /> render suit`, () => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import {shallow} from 'enzyme';
-import withUserAnswer from './with-user-answer.jsx';
+import withUserAnswer from './with-user-answer';
 
 const QUESTION = {
   type: `genre`,

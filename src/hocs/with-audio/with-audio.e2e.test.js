@@ -1,9 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {mount} from 'enzyme';
-import withAudio from './with-audio.jsx';
+import withAudio from './with-audio';
 
 const MockComponent = (props) => {
+  // eslint-disable-next-line react/prop-types
   const {onPlayButtonClick, children} = props;
   return (
     <div>
@@ -13,13 +13,13 @@ const MockComponent = (props) => {
   );
 };
 
-MockComponent.propTypes = {
-  onPlayButtonClick: PropTypes.func.isRequired,
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
-  ]).isRequired,
-};
+// MockComponent.propTypes = {
+//   onPlayButtonClick: PropTypes.func.isRequired,
+//   children: PropTypes.oneOfType([
+//     PropTypes.arrayOf(PropTypes.node),
+//     PropTypes.node
+//   ]).isRequired,
+// };
 
 const MockComponentWrapped = withAudio(MockComponent);
 

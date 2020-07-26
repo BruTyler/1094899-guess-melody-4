@@ -1,5 +1,5 @@
-import {reducer, ActionCreator, ActionType} from './user.js';
-import {AuthorizationStatus} from '../../const.js';
+import {reducer, ActionCreator, ActionType} from './user';
+import {AuthorizationStatus} from '../../const';
 
 describe(`User reducer unit-tests`, () => {
   it(`User reducer without additional parameters should return initial state`, () => {

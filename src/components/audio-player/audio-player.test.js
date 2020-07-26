@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import AudioPlayer from './audio-player.jsx';
+import AudioPlayer from './audio-player';
 
 const CLICKHANDLER = () => {};
 const QUESTION_ARTIST = {

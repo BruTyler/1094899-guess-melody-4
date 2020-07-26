@@ -1,6 +1,6 @@
 import React from 'react';
 import {mount} from 'enzyme';
-import AudioPlayer from './audio-player.jsx';
+import AudioPlayer from './audio-player';
 
 describe(`<AudioPlayer /> e2e suite`, () => {
   it(`<AudioPlayer /> button play/stop is pressed`, () => {

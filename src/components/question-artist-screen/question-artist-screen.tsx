@@ -1,8 +1,14 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import {GameType} from '../../const.js';
+import * as React from 'react';
+import {QuestionArtist, AnswerArtist} from '../../types';
 
-const QuestionArtistScreen = ({onAnswer, question, renderPlayer}) => {
+interface Props {
+  onAnswer: (question: QuestionArtist, answer: AnswerArtist) => void,
+  renderPlayer: (src: string, id: number) => React.ReactNode,
+  question: QuestionArtist,
+}
+
+const QuestionArtistScreen: React.FunctionComponent<Props> = (props: Props) => {
+  const {onAnswer, question, renderPlayer} = props;
   const {answers, song} = question;
 
   return <section className="game__screen">
@@ -30,24 +36,6 @@ const QuestionArtistScreen = ({onAnswer, question, renderPlayer}) => {
       })}
     </form>
   </section>;
-};
-
-QuestionArtistScreen.propTypes = {
-  onAnswer: PropTypes.func.isRequired,
-  renderPlayer: PropTypes.func.isRequired,
-  question: PropTypes.shape({
-    type: PropTypes.oneOf([GameType.ARTIST]).isRequired,
-    song: PropTypes.shape({
-      artist: PropTypes.string.isRequired,
-      src: PropTypes.string.isRequired,
-    }).isRequired,
-    answers: PropTypes.arrayOf(
-        PropTypes.shape({
-          picture: PropTypes.string.isRequired,
-          artist: PropTypes.string.isRequired,
-        })
-    ).isRequired
-  }).isRequired,
 };
 
 export default QuestionArtistScreen;

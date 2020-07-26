@@ -1,9 +1,14 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import {AppRoute} from '../../const';
+import * as React from 'react';
 import {Link} from 'react-router-dom';
+import {AppRoute} from '../../const';
 
-const GameWinScreen = ({onReplayButtonClick, mistakesCount, answeredQuestionsCount}) => (
+interface Props {
+  onReplayButtonClick: () => void,
+  mistakesCount: number,
+  answeredQuestionsCount: number,
+}
+
+const GameWinScreen: React.FunctionComponent<Props> = ({onReplayButtonClick, mistakesCount, answeredQuestionsCount}: Props) => (
   <section className="result">
     <div className="result__logo"><img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83" /></div>
     <h2 className="result__title">Вы настоящий меломан!</h2>
@@ -18,11 +23,5 @@ const GameWinScreen = ({onReplayButtonClick, mistakesCount, answeredQuestionsCou
     </Link>
   </section>
 );
-
-GameWinScreen.propTypes = {
-  onReplayButtonClick: PropTypes.func.isRequired,
-  mistakesCount: PropTypes.number.isRequired,
-  answeredQuestionsCount: PropTypes.number.isRequired,
-};
 
 export default GameWinScreen;
