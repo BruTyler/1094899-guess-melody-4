@@ -1,5 +1,5 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
+import * as React from 'react';
+import * as renderer from 'react-test-renderer';
 import GameWinScreen from './game-win-screen';
 import {BrowserRouter} from 'react-router-dom';
 
@@ -8,7 +8,7 @@ describe(`<GameWinScreen /> render suit`, () => {
     const generatedTree = renderer.create(
         <BrowserRouter>
           <GameWinScreen
-            onReplayButtonClick={() => {}}
+            onReplayButtonClick={() => null}
             answeredQuestionsCount={2}
             mistakesCount={2}
           />

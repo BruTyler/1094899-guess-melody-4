@@ -1,5 +1,5 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
+import * as React from 'react';
+import * as renderer from 'react-test-renderer';
 import GameOverScreen from './game-over-screen';
 import {BrowserRouter} from 'react-router-dom';
 
@@ -8,7 +8,7 @@ describe(`<GameOverScreen /> render suit`, () => {
     const generatedTree = renderer.create(
         <BrowserRouter>
           <GameOverScreen
-            onReplayButtonClick={() => {}}
+            onReplayButtonClick={() => null}
           />
         </BrowserRouter>
     ).toJSON();

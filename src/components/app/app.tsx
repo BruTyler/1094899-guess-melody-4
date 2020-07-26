@@ -174,5 +174,5 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   },
 });
 
-export {App as RawComponent};
+export {App};
 export default connect(mapStateToProps, mapDispatchToProps)(App);

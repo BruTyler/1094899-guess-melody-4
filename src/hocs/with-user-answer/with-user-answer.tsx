@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {QuestionGenre, UserAnswers} from '../../types';
+import {Subtract} from 'utility-types';
 
 interface Props {
   question: QuestionGenre;
@@ -10,9 +11,18 @@ interface State {
   userAnswers: UserAnswers;
 }
 
+interface InjectedProps {
+  userAnswers: UserAnswers;
+  onAnswerChange: (answerIndex: number) => void;
+  onAnswer: () => void;
+}
+
 const withUserAnswer = (Component) => {
-  class WithUserAnswer extends React.PureComponent<Props, State> {
-    constructor(props) {
+  type P = React.ComponentProps<typeof Component>;
+  type T = Props & Subtract<P, InjectedProps>;
+
+  class WithUserAnswer extends React.PureComponent<T, State> {
+    constructor(props: Props) {
       super(props);
 
       this.state = {

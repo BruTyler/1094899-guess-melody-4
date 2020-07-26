@@ -1,10 +1,15 @@
-import React from 'react';
+import * as React from 'react';
 import {mount} from 'enzyme';
 import withAudio from './with-audio';
 
-const MockComponent = (props) => {
-  // eslint-disable-next-line react/prop-types
+interface Props {
+  children: React.ReactNode;
+  onPlayButtonClick: () => void;
+}
+
+const MockComponent: React.FunctionComponent<Props> = (props: Props) => {
   const {onPlayButtonClick, children} = props;
+
   return (
     <div>
       <button onClick={onPlayButtonClick} />
@@ -12,14 +17,6 @@ const MockComponent = (props) => {
     </div>
   );
 };
-
-// MockComponent.propTypes = {
-//   onPlayButtonClick: PropTypes.func.isRequired,
-//   children: PropTypes.oneOfType([
-//     PropTypes.arrayOf(PropTypes.node),
-//     PropTypes.node
-//   ]).isRequired,
-// };
 
 const MockComponentWrapped = withAudio(MockComponent);
 
@@ -30,11 +27,11 @@ describe(`withAudioPlayer e2e suite`, () => {
 
     const pauseStub = jest
       .spyOn(window.HTMLMediaElement.prototype, `pause`)
-      .mockImplementation(() => {});
+      .mockImplementation(() => null);
 
     const playStub = jest
       .spyOn(window.HTMLMediaElement.prototype, `play`)
-      .mockImplementation(() => {});
+      .mockImplementation(() => null);
 
     const audioPlayer = mount(
         <MockComponentWrapped

@@ -1,24 +1,14 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
+import * as React from 'react';
+import * as renderer from 'react-test-renderer';
 import withAudio from './with-audio';
 
-const MockComponent = (props) => {
-  // eslint-disable-next-line react/prop-types
-  const {children} = props;
+interface Props {
+  children: React.ReactNode;
+}
 
-  return (
-    <div>
-      {children}
-    </div>
-  );
-};
-
-// MockComponent.propTypes = {
-//   children: PropTypes.oneOfType([
-//     PropTypes.arrayOf(PropTypes.node),
-//     PropTypes.node
-//   ]).isRequired,
-// };
+const MockComponent: React.FunctionComponent<Props> = (props: Props) => (
+  <div>{props.children}</div>
+);
 
 const MockComponentWrapped = withAudio(MockComponent);
 
@@ -28,7 +18,7 @@ describe(`withAudio render suit`, () => {
         <MockComponentWrapped
           src={``}
           isPlaying={false}
-          onPlayButtonClick={() => {}}
+          onPlayButtonClick={() => null}
         />,
         {
           createNodeMock: () => {

@@ -1,5 +1,5 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
+import * as React from 'react';
+import * as renderer from 'react-test-renderer';
 
 import {GameScreen} from './game-screen';
 import {GameType} from '../../const';
@@ -15,7 +15,7 @@ describe(`<GameScreen /> render suit`, () => {
           <GameScreen
             gameType={GAME_TYPE}
             mistakes={3}
-            goToWelcome={() => {}}
+            goToWelcome={() => null}
           >
             {CHILDREN_MARKUP}
           </GameScreen>

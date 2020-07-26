@@ -22,11 +22,11 @@ exports[`<GameWinScreen /> render suit <GameWinScreen /> render case 1`] = `
   <p
     className="result__total"
   >
-    Вы ответили правильно на 
+    Вы ответили правильно на 
     2
      вопросов и совершили 
     2
-     ошибки
+     ошибки
   </p>
   <a
     className="replay"

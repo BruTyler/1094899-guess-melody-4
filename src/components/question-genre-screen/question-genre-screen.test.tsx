@@ -1,11 +1,13 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
+import * as React from 'react';
+import * as renderer from 'react-test-renderer';
 import QuestionGenreScreen from './question-genre-screen';
+import {GameType} from '../../const';
+import {QuestionGenre} from '../../types';
 
-const EMPTY_HANDLER = () => {};
+const EMPTY_HANDLER = () => null;
 const USER_ANSWERS = [false, false, false, false];
-const QUESTION = {
-  type: `genre`,
+const QUESTION: QuestionGenre = {
+  type: GameType.GENRE,
   genre: `rock`,
   answers: [{
     src: `url/rock`,

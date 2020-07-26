@@ -1,8 +1,7 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
+import * as React from 'react';
+import * as renderer from 'react-test-renderer';
 import AudioPlayer from './audio-player';
 
-const CLICKHANDLER = () => {};
 const QUESTION_ARTIST = {
   song: {
     src: `https://upload.wikimedia.org/wikipedia/commons/1/1f/Uganda_flag_and_national_anthem_-_Oh_Uganda_Land_o.ogg`
@@ -16,7 +15,7 @@ describe(`<AudioPlayer /> render suit`, () => {
           src={QUESTION_ARTIST.song.src}
           isPlaying={true}
           isLoading={false}
-          onPlayButtonClick={CLICKHANDLER}
+          onPlayButtonClick={() => null}
         >
           <audio />
         </AudioPlayer>,

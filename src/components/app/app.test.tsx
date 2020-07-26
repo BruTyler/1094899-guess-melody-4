@@ -1,16 +1,18 @@
 import * as React from 'react';
-import renderer from 'react-test-renderer';
+import * as renderer from 'react-test-renderer';
 import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import MockAdapter from 'axios-mock-adapter';
 
-import * as App from './app';
+import {App} from './app';
 import NameSpace from '../../reducer/name-space';
 import {AuthorizationStatus, GameType} from '../../const';
 import {createAPI} from '../../api';
+import {Question} from '../../types';
 
-const api = createAPI(() => {});
+const EMPTY_HANDLER = () => null;
+const api = createAPI(EMPTY_HANDLER);
 const apiMock = new MockAdapter(api);
 
 apiMock
@@ -18,11 +20,10 @@ apiMock
   .reply(200, []);
 const mockStore = configureStore([thunk.withExtraArgument(api)]);
 
-const EMPTY_HANDLER = () => {};
 const MAX_ERRORS = 3;
-const QUESTIONS = [
+const QUESTIONS: Question[] = [
   {
-    type: `genre`,
+    type: GameType.GENRE,
     genre: `rock`,
     answers: [{
       src: `url/rock`,
@@ -38,7 +39,7 @@ const QUESTIONS = [
       genre: `rock`,
     }],
   }, {
-    type: `artist`,
+    type: GameType.ARTIST,
     song: {
       artist: `Jim Beam`,
       src: `src/url`,
@@ -57,40 +58,9 @@ const QUESTIONS = [
 ];
 
 describe(`App render suit`, () => {
-  it(`App connected with Store renders WelcomeScreen`, () => {
-    const store = mockStore({
-      [NameSpace.GAME]: {
-        step: -1,
-        mistakes: 0,
-        maxMistakes: MAX_ERRORS,
-      },
-      [NameSpace.DATA]: {
-        questions: [],
-      },
-      [NameSpace.USER]: {
-        authorizationStatus: AuthorizationStatus.NO_AUTH,
-      },
-    });
-
-    const generatedTree = renderer.create(
-        <Provider store={store}>
-          <App
-            onUserAnswer={EMPTY_HANDLER}
-            onWelcomeButtonClick={EMPTY_HANDLER}
-            onResetGame={EMPTY_HANDLER}
-            onLoginSubmit={EMPTY_HANDLER}
-            handleLoadQuestions={EMPTY_HANDLER}
-            handleCheckAuthorization={EMPTY_HANDLER}
-          />
-        </Provider>
-    ).toJSON();
-
-    expect(generatedTree).toMatchSnapshot();
-  });
-
   it(`App renders WelcomeScreen`, () => {
     const generatedTree = renderer.create(
-        <App.RawComponent
+        <App
           errorCount={MAX_ERRORS}
           questions={QUESTIONS}
           onUserAnswer={EMPTY_HANDLER}
@@ -120,7 +90,7 @@ describe(`App render suit`, () => {
 
     const generatedTree = renderer.create(
         <Provider store={store}>
-          <App.RawComponent
+          <App
             errorCount={MAX_ERRORS}
             questions={QUESTIONS}
             onUserAnswer={EMPTY_HANDLER}
@@ -155,7 +125,7 @@ describe(`App render suit`, () => {
 
     const generatedTree = renderer.create(
         <Provider store={store}>
-          <App.RawComponent
+          <App
             errorCount={MAX_ERRORS}
             questions={QUESTIONS}
             onUserAnswer={EMPTY_HANDLER}

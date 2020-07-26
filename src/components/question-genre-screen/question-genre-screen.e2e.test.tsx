@@ -1,11 +1,13 @@
-import React from 'react';
+import * as React from 'react';
 import {mount} from 'enzyme';
 import QuestionGenreScreen from './question-genre-screen';
+import {GameType} from '../../const';
+import {QuestionGenre} from '../../types';
 
-const EMPTY_HANDLER = () => {};
+const EMPTY_HANDLER = () => null;
 const USER_ANSWERS = [false, false, false, false];
-const QUESTION = {
-  type: `genre`,
+const QUESTION: QuestionGenre = {
+  type: GameType.GENRE,
   genre: `rock`,
   answers: [{
     src: `url/rock`,
@@ -30,7 +32,7 @@ describe(`QuestionGenreScreen e2e suite`, () => {
         <QuestionGenreScreen
           onAnswer={onAnswerMock}
           question={QUESTION}
-          renderPlayer={EMPTY_HANDLER}
+          renderPlayer={() => null}
           onAnswerChange={EMPTY_HANDLER}
           userAnswers={USER_ANSWERS}
         />
@@ -51,7 +53,7 @@ describe(`QuestionGenreScreen e2e suite`, () => {
         <QuestionGenreScreen
           onAnswer={onAnswerMock}
           question={QUESTION}
-          renderPlayer={EMPTY_HANDLER}
+          renderPlayer={() => null}
           onAnswerChange={EMPTY_HANDLER}
           userAnswers={USER_ANSWERS}
         />
@@ -75,7 +77,7 @@ describe(`QuestionGenreScreen e2e suite`, () => {
         <QuestionGenreScreen
           onAnswer={EMPTY_HANDLER}
           question={QUESTION}
-          renderPlayer={EMPTY_HANDLER}
+          renderPlayer={() => null}
           onAnswerChange={onAnswerChangeMock}
           userAnswers={USER_ANSWERS}
         />

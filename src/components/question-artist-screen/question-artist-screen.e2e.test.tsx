@@ -1,10 +1,11 @@
-import React from 'react';
+import * as React from 'react';
 import {shallow} from 'enzyme';
 import QuestionArtistScreen from './question-artist-screen';
+import {QuestionArtist} from '../../types';
+import {GameType} from '../../const';
 
-const EMPTY_HANDLER = () => {};
-const QUESTION = {
-  type: `artist`,
+const QUESTION: QuestionArtist = {
+  type: GameType.ARTIST,
   song: {
     artist: `Jim Beam`,
     src: `src/url`,
@@ -29,7 +30,7 @@ describe(`QuestionArtistScreen e2e suite`, () => {
         <QuestionArtistScreen
           onAnswer={onAnswerMock}
           question={QUESTION}
-          renderPlayer={EMPTY_HANDLER}
+          renderPlayer={() => null}
         />
     );
 
@@ -43,18 +44,19 @@ describe(`QuestionArtistScreen e2e suite`, () => {
 
   it(`QuestionArtistScreen answer callback contains user answer`, () => {
     const expectedUserAnswer = QUESTION.answers[0];
-    const onAnswerMock = jest.fn((...args) => [...args]);
+    const onAnswerMock = jest.fn();
 
     const questionArtistScreen = shallow(
         <QuestionArtistScreen
           onAnswer={onAnswerMock}
           question={QUESTION}
-          renderPlayer={EMPTY_HANDLER}
+          renderPlayer={() => null}
         />
     );
 
     const firstInputElement = questionArtistScreen.find(`input`).at(0);
-    const mockEvent = {preventDefault() {}};
+    const preventDefaultMock = jest.fn();
+    const mockEvent = {preventDefault: preventDefaultMock};
     firstInputElement.simulate(`change`, mockEvent);
 
     expect(onAnswerMock).toHaveBeenCalledTimes(1);

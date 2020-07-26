@@ -7,6 +7,7 @@
       "target": "es2016",
       "jsx": "react",
       "allowSyntheticDefaultImports": false,
+      "lib": ["dom"]
     },
     "exclude": [
       "node_modules",

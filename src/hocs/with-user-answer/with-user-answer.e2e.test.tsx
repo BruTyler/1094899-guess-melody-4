@@ -1,9 +1,11 @@
-import React from 'react';
+import * as React from 'react';
 import {shallow} from 'enzyme';
 import withUserAnswer from './with-user-answer';
+import {QuestionGenre} from '../../types';
+import {GameType} from '../../const';
 
-const QUESTION = {
-  type: `genre`,
+const QUESTION: QuestionGenre = {
+  type: GameType.GENRE,
   genre: `rock`,
   answers: [{
     src: `url/rock`,

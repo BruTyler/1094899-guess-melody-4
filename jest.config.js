@@ -13,4 +13,7 @@ module.exports = {
     `json`,
     `node`
   ],
+  setupFilesAfterEnv: [
+    `./setupTests.js`
+  ]
 };

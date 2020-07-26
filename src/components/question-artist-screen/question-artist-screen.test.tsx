@@ -1,10 +1,12 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
+import * as React from 'react';
+import * as renderer from 'react-test-renderer';
 import QuestionArtistScreen from './question-artist-screen';
+import {QuestionArtist} from '../../types';
+import {GameType} from '../../const';
 
-const EMPTY_HANDLER = () => {};
-const QUESTION = {
-  type: `artist`,
+const EMPTY_HANDLER = () => null;
+const QUESTION: QuestionArtist = {
+  type: GameType.ARTIST,
   song: {
     artist: `Jim Beam`,
     src: `src/url`,

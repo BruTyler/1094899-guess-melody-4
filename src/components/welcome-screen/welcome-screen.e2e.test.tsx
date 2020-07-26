@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import {shallow} from 'enzyme';
 import WelcomeScreen from './welcome-screen';
 
@@ -14,7 +14,7 @@ describe(`WelcomeScreen suite`, () => {
     );
 
     const welcomeButton = welcomeScreen.find(`button.welcome__button`);
-    welcomeButton.simulate(`click`, {preventDefault() {}});
+    welcomeButton.simulate(`click`);
 
     expect(onWelcomeButtonHandler.mock.calls.length).toBe(1);
   });
