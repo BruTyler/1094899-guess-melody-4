@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<GameWinScreen /> render suit <GameWinScreen /> render case 1`] = `
+<section
+  className="result"
+>
+  <div
+    className="result__logo"
+  >
+    <img
+      alt="Угадай мелодию"
+      height="83"
+      src="img/melody-logo.png"
+      width="186"
+    />
+  </div>
+  <h2
+    className="result__title"
+  >
+    Вы настоящий меломан!
+  </h2>
+  <p
+    className="result__total"
+  >
+    Вы ответили правильно на 
+    2
+     вопросов и совершили 
+    2
+     ошибки
+  </p>
+  <a
+    className="replay"
+    href="/"
+    onClick={[Function]}
+    type="button"
+  >
+    Сыграть ещё раз
+  </a>
+</section>
+`;

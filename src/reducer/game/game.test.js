@@ -1,5 +1,5 @@
-import {reducer, ActionType, ActionCreator} from './game.js';
-import {GameType, WelcomeScreenBehaviour} from '../../const.js';
+import {reducer, ActionType, ActionCreator} from './game';
+import {GameType, WelcomeScreenBehaviour} from '../../const';
 
 const QUESTIONS = [
   {
