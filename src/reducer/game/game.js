@@ -1,5 +1,5 @@
-import {extend} from '../../utils.js';
-import {GameType, WelcomeScreenBehaviour} from '../../const.js';
+import {extend} from '../../utils';
+import {GameType, WelcomeScreenBehaviour} from '../../const';
 
 const initialState = {
   mistakes: 0,

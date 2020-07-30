@@ -1,6 +1,6 @@
 import {createSelector} from 'reselect';
-import NameSpace from '../name-space.js';
-import {GameType} from '../../const.js';
+import NameSpace from '../name-space';
+import {GameType} from '../../const';
 
 const NAME_SPACE = NameSpace.DATA;
 
